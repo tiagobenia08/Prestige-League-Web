@@ -19,6 +19,7 @@
       <a href="#liga">Liga</a>
       <a href="#rankings">Rankings</a>
       <a href="#torneos">Torneos</a>
+      <a href="#inscripcion">Inscripción</a>
       <a href="#equipos">Equipos</a>
       <a href="#info">Información</a>
     </nav>
@@ -262,6 +263,58 @@
           <div><span class="event-type">TORNEO</span><h3>HISTORIAL</h3><p>Todos los eventos anteriores de Prestige League.</p></div>
           <a href="#" class="card-link">VER HISTORIAL →</a>
         </article>
+      </div>
+    </section>
+
+    <section id="inscripcion" class="section registration-section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">PRÓXIMO TORNEO</span>
+          <h2>INSCRIPCIÓN</h2>
+          <p class="registration-intro">Completá los datos del equipo para solicitar la inscripción al próximo torneo de Prestige League.</p>
+        </div>
+        <div class="entry-fee"><span>INSCRIPCIÓN</span><strong>USD 25</strong></div>
+      </div>
+
+      <div class="registration-layout">
+        <form id="registration-form" class="registration-form">
+          <div class="form-section-title"><span>01</span><h3>DATOS DEL EQUIPO</h3></div>
+          <label>Nombre del equipo<input name="team_name" type="text" maxlength="40" required placeholder="Nombre del equipo"></label>
+          <label>País<input name="country" type="text" maxlength="40" required placeholder="País del equipo"></label>
+          <label>Número de contacto del capitán<input name="captain_contact" type="text" maxlength="40" required placeholder="WhatsApp / teléfono"></label>
+
+          <div class="form-section-title players-title"><span>02</span><h3>JUGADORES</h3><small>Máximo 6 jugadores</small></div>
+          <div class="players-form-grid">
+            <label>Jugador 1<input name="player_1" type="text" maxlength="32" required placeholder="ID de PSN"></label>
+            <label>Jugador 2<input name="player_2" type="text" maxlength="32" required placeholder="ID de PSN"></label>
+            <label>Jugador 3<input name="player_3" type="text" maxlength="32" required placeholder="ID de PSN"></label>
+            <label>Jugador 4<input name="player_4" type="text" maxlength="32" required placeholder="ID de PSN"></label>
+            <label>Jugador 5<input name="player_5" type="text" maxlength="32" placeholder="ID de PSN"></label>
+            <label>Jugador 6<input name="player_6" type="text" maxlength="32" placeholder="ID de PSN"></label>
+          </div>
+
+          <div class="form-section-title players-title"><span>03</span><h3>PAGO</h3><small>USD 25</small></div>
+          <div class="payment-box">
+            <div><strong>Inscripción al torneo</strong><p>El valor de la inscripción es de <b>USD 25</b>. Realizá el pago y luego completá la referencia o comprobante para que la organización pueda verificarlo.</p></div>
+            <a id="payment-link" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">PAGAR USD 25 →</a>
+          </div>
+          <label>Referencia del pago<input name="payment_reference" type="text" maxlength="120" required placeholder="N.º de operación, nombre del pagador, etc."></label>
+
+          <button class="btn btn-primary registration-submit" type="submit">ENVIAR INSCRIPCIÓN</button>
+          <p id="registration-message" class="registration-message" role="status"></p>
+        </form>
+
+        <aside class="registration-aside">
+          <span class="section-kicker">IMPORTANTE</span>
+          <h3>ANTES DE ENVIAR</h3>
+          <ul>
+            <li>El equipo puede registrar hasta <strong>6 jugadores</strong>.</li>
+            <li>Los ID de PSN deben estar escritos correctamente.</li>
+            <li>La inscripción tiene un valor de <strong>USD 25</strong>.</li>
+            <li>La organización verificará el pago y los datos enviados.</li>
+          </ul>
+          <div class="registration-note">Una vez enviada, la solicitud quedará registrada para revisión de la organización.</div>
+        </aside>
       </div>
     </section>
 

@@ -29,3 +29,99 @@ a{text-decoration:none;color:inherit}.site-header{height:82px;display:flex;align
 .ban-group h4 { margin: 0 0 10px; color: #fff; font-size: .95rem; }
 .regulation-warning { margin-top: 18px; padding: 18px 20px; border-left: 3px solid #ff7a00; background: rgba(255,122,0,.07); color: var(--muted); line-height: 1.6; }
 @media (max-width: 800px) { .regulation-grid, .ban-groups { grid-template-columns: 1fr; } .regulation-card.wide { grid-column: auto; } }
+
+
+/* Inscripción al torneo */
+.registration-section { border-top: 1px solid var(--line); }
+.registration-intro { max-width: 680px; color: var(--muted); line-height: 1.7; margin: 12px 0 0; }
+.entry-fee { min-width: 150px; padding: 22px 24px; border: 1px solid rgba(255,118,0,.35); background: rgba(255,118,0,.07); display:flex; flex-direction:column; gap:4px; }
+.entry-fee span { color: var(--orange); font-size:10px; font-weight:800; letter-spacing:.14em; }
+.entry-fee strong { font:800 42px "Barlow Condensed",sans-serif; }
+.registration-layout { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(280px,.65fr); gap:22px; align-items:start; }
+.registration-form { background:#0d0d0f; border:1px solid var(--line); padding:30px; }
+.form-section-title { display:flex; align-items:center; gap:12px; margin:0 0 18px; }
+.form-section-title + label { margin-top:0; }
+.form-section-title span { color:var(--orange); font-size:11px; font-weight:800; letter-spacing:.12em; }
+.form-section-title h3 { font-size:28px; margin:0; }
+.form-section-title small { margin-left:auto; color:#666; font-size:10px; letter-spacing:.08em; }
+.registration-form > label { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; color:#aaa; font-size:10px; font-weight:800; letter-spacing:.1em; }
+.registration-form input { width:100%; background:#09090a; color:var(--text); border:1px solid #303034; padding:13px 14px; font:500 13px Inter,Arial,sans-serif; outline:none; }
+.registration-form input:focus { border-color:var(--orange); }
+.registration-form input::placeholder { color:#555; }
+.players-title { margin-top:30px; padding-top:26px; border-top:1px solid var(--line); }
+.players-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.players-form-grid label { display:flex; flex-direction:column; gap:7px; color:#aaa; font-size:10px; font-weight:800; letter-spacing:.1em; }
+.players-form-grid input { margin-top:0; }
+.payment-box { margin:24px 0 20px; padding:22px; border:1px solid rgba(255,118,0,.32); background:linear-gradient(135deg,rgba(255,118,0,.1),#0b0b0d 65%); display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.payment-box strong { font-size:16px; }
+.payment-box p { color:#888; font-size:11px; line-height:1.6; max-width:600px; margin:7px 0 0; }
+.payment-box b { color:var(--orange); }
+.registration-submit { margin-top:6px; cursor:pointer; }
+.registration-submit:disabled { opacity:.55; cursor:wait; }
+.registration-message { min-height:20px; color:#888; font-size:11px; line-height:1.5; }
+.registration-message.success { color:#8fd18f; }
+.registration-message.error { color:#ff8a8a; }
+.registration-aside { background:#0d0d0f; border:1px solid var(--line); padding:30px; }
+.registration-aside h3 { font-size:36px; margin:12px 0 20px; }
+.registration-aside ul { margin:0; padding-left:20px; color:#999; font-size:12px; line-height:2; }
+.registration-aside strong { color:var(--orange); }
+.registration-note { margin-top:25px; padding:16px; border-left:3px solid var(--orange); background:rgba(255,118,0,.06); color:#888; font-size:11px; line-height:1.6; }
+@media(max-width:800px){
+  .registration-layout { grid-template-columns:1fr; }
+  .entry-fee { width:100%; }
+  .players-form-grid { grid-template-columns:1fr; }
+  .payment-box { flex-direction:column; align-items:flex-start; }
+}
+
+.site-page { display:none; }
+.page-view { display:none; min-height:70vh; padding:80px 7vw 100px; }
+.page-view.active { display:block; }
+body.app-home .site-page { display:none; }
+body.app-home .page-view { display:none; }
+.page-header { max-width:980px; margin:0 auto 36px; }
+.page-header h1 { font:900 clamp(52px,8vw,100px) "Barlow Condensed",sans-serif; margin:8px 0 8px; text-transform:uppercase; }
+.page-header p { color:#999; max-width:760px; line-height:1.7; }
+.back-home { background:none; border:0; color:#777; cursor:pointer; font-size:10px; font-weight:800; letter-spacing:.1em; padding:0; margin-bottom:35px; }
+.back-home:hover { color:var(--orange); }
+.nav-page-btn { background:none; border:0; color:inherit; font:inherit; text-transform:inherit; cursor:pointer; padding:0; }
+.nav-page-btn:hover { color:var(--orange); }
+.page-tabs { display:flex; gap:8px; margin:0 auto 24px; max-width:980px; border-bottom:1px solid var(--line); }
+.content-tab { background:none; border:0; color:#666; padding:14px 18px; cursor:pointer; font-size:11px; font-weight:800; letter-spacing:.12em; }
+.content-tab.active { color:var(--orange); border-bottom:2px solid var(--orange); }
+.page-panel { max-width:980px; margin:auto; background:#0d0d0f; border:1px solid var(--line); padding:30px; }
+.page-panel.hidden { display:none; }
+.page-panel h2 { font-size:36px; margin:0 0 20px; }
+.page-panel p { color:#999; line-height:1.8; }
+.info-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px; }
+.info-cards.large { max-width:980px; margin:auto; }
+.info-cards div { border:1px solid var(--line); background:#0d0d0f; padding:22px; display:flex; flex-direction:column; gap:8px; }
+.info-cards b { color:var(--orange); font-size:11px; letter-spacing:.12em; }
+.info-cards span { color:#999; font-size:12px; line-height:1.5; }
+.full-ranking-list { max-height:none; }
+.rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.rules-grid > div { border:1px solid var(--line); padding:20px; }
+.rules-grid .wide { grid-column:1/-1; }
+.rules-grid h3 { color:var(--orange); font-size:14px; letter-spacing:.08em; margin:0 0 10px; }
+.tournament-grid { max-width:980px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.tournament-card { border:1px solid var(--line); background:#0d0d0f; padding:30px; min-height:220px; }
+.tournament-card.featured { border-color:rgba(255,118,0,.4); }
+.tournament-card h2 { font-size:34px; margin:10px 0; }
+.tournament-card p { color:#999; line-height:1.7; }
+.tournament-card strong { color:var(--orange); }
+.chat-shell { max-width:900px; margin:auto; border:1px solid var(--line); background:#0d0d0f; }
+.chat-messages { min-height:420px; max-height:560px; overflow:auto; padding:22px; display:flex; flex-direction:column; gap:12px; }
+.chat-message { max-width:80%; padding:13px 15px; border:1px solid var(--line); background:#111113; display:flex; flex-direction:column; gap:5px; font-size:12px; line-height:1.5; }
+.chat-message.staff { border-left:3px solid var(--orange); }
+.chat-message.user { align-self:flex-end; }
+.chat-message b { color:var(--orange); font-size:10px; letter-spacing:.08em; }
+.chat-message span { color:#aaa; }
+.chat-form { display:grid; grid-template-columns:180px 1fr auto; gap:10px; padding:15px; border-top:1px solid var(--line); }
+.chat-form input { background:#09090a; border:1px solid #303034; color:#fff; padding:13px; outline:none; }
+.chat-form input:focus { border-color:var(--orange); }
+.staff-chat-fab { position:fixed; right:24px; bottom:24px; z-index:20; border:1px solid rgba(255,118,0,.5); background:#101012; color:var(--orange); padding:13px 18px; font-size:10px; font-weight:900; letter-spacing:.1em; cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+@media(max-width:800px){
+  .info-cards, .tournament-grid, .rules-grid { grid-template-columns:1fr; }
+  .rules-grid .wide { grid-column:auto; }
+  .chat-form { grid-template-columns:1fr; }
+  .chat-message { max-width:92%; }
+}

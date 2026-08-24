@@ -21,3 +21,7 @@ El navegador NO debe conectarse directamente a PostgreSQL. La arquitectura será
 Frontend -> API/backend -> PostgreSQL
 
 La base de datos existente del bot se conserva.
+
+
+## V8 consolidada
+Incluye Home conectado a PostgreSQL, rankings completos, Discord, Modo Liga, resultado `/resultado`, reglamento, inscripción al torneo y pago PayPal. El enlace de pago predeterminado es https://paypal.me/prestigeleaguetorneo/25USD.
