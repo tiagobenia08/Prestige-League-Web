@@ -22,7 +22,7 @@
       <a href="#equipos">Equipos</a>
       <a href="#info">Información</a>
     </nav>
-    <a class="discord-btn" href="#" aria-label="Discord">DISCORD</a>
+    <a id="discord-btn" class="discord-btn" href="#" target="_blank" rel="noopener" aria-label="Discord">DISCORD</a>
   </header>
 
   <main>
@@ -48,9 +48,9 @@
     </section>
 
     <section class="stats-strip">
-      <div><strong>186+</strong><span>JUGADORES</span></div>
+      <div><strong id="stat-players">—</strong><span>JUGADORES</span></div>
       <div><strong>2</strong><span>REGIONES</span></div>
-      <div><strong>4</strong><span>EQUIPOS REGISTRADOS</span></div>
+      <div><strong id="stat-teams">—</strong><span>EQUIPOS</span></div>
       <div><strong>∞</strong><span>COMPETENCIA</span></div>
     </section>
 
@@ -80,6 +80,7 @@
           <span class="section-kicker">COMPETENCIA</span>
           <h2>RANKINGS</h2>
         </div>
+
       </div>
 
       <div class="ranking-layout">
@@ -89,13 +90,7 @@
             <h3>RANKING INDIVIDUAL</h3>
             <small>MMR</small>
           </div>
-          <div id="players-ranking" class="ranking-list">
-            <div class="ranking-row"><b>01</b><span class="avatar"></span><strong>Datos en vivo</strong><em>—</em></div>
-            <div class="ranking-row"><b>02</b><span class="avatar"></span><strong>Conectado a PostgreSQL</strong><em>—</em></div>
-            <div class="ranking-row"><b>03</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
-            <div class="ranking-row"><b>04</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
-            <div class="ranking-row"><b>05</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
-          </div>
+          <div id="players-ranking" class="ranking-list"><div class="ranking-row"><strong>Cargando ranking…</strong></div></div>
           <a class="card-link" href="#">VER RANKING COMPLETO →</a>
         </article>
 
@@ -105,12 +100,7 @@
             <h3>RANKING DE EQUIPOS</h3>
             <small>MMR</small>
           </div>
-          <div id="teams-ranking" class="ranking-list">
-            <div class="ranking-row team-row"><b>01</b><span class="team-logo">PL</span><strong>Equipo líder</strong><em>—</em></div>
-            <div class="ranking-row team-row"><b>02</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
-            <div class="ranking-row team-row"><b>03</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
-            <div class="ranking-row team-row"><b>04</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
-          </div>
+          <div id="teams-ranking" class="ranking-list"><div class="ranking-row team-row"><strong>Cargando ranking…</strong></div></div>
           <a class="card-link" href="#">VER EQUIPOS →</a>
         </article>
       </div>
