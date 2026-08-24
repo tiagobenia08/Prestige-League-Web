@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prestige League — comunidad competitiva de Call of Duty: Black Ops 2 en LATAM y Europa." />
+  <title>Prestige League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Prestige League">
+      <img src="assets/prestige-logo.png" alt="Prestige League" />
+    </a>
+    <nav class="nav">
+      <a href="#liga">Liga</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#torneos">Torneos</a>
+      <a href="#equipos">Equipos</a>
+      <a href="#info">Información</a>
+    </nav>
+    <a class="discord-btn" href="#" aria-label="Discord">DISCORD</a>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <span class="eyebrow">LATAM · EUROPA · BLACK OPS 2</span>
+        <h1>PRESTIGE<br><span>LEAGUE</span></h1>
+        <p class="hero-copy">
+          La liga competitiva de Black Ops 2 con una comunidad internacional.
+          Rankings, equipos, jugadores y torneos en un solo lugar.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#rankings">VER RANKINGS</a>
+          <a class="btn btn-ghost" href="#torneos">VER TORNEOS</a>
+        </div>
+        <div class="regions">
+          <div><strong>LATAM</strong><span>REGIÓN ACTIVA</span></div>
+          <div><strong>EUROPA</strong><span>REGIÓN ACTIVA</span></div>
+          <div><strong>01</strong><span>COMUNIDAD GLOBAL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip">
+      <div><strong>186+</strong><span>JUGADORES</span></div>
+      <div><strong>2</strong><span>REGIONES</span></div>
+      <div><strong>4</strong><span>EQUIPOS REGISTRADOS</span></div>
+      <div><strong>∞</strong><span>COMPETENCIA</span></div>
+    </section>
+
+    <section id="liga" class="section split">
+      <div>
+        <span class="section-kicker">MODO LIGA</span>
+        <h2>COMPETÍ.<br>SUBÍ. <span>DOMINÁ.</span></h2>
+      </div>
+      <div class="section-text">
+        <p>
+          Prestige League mantiene la búsqueda de partidas dentro de Discord.
+          La web es el centro oficial para consultar la competición, seguir
+          rankings y conocer a los jugadores y equipos.
+        </p>
+        <div class="feature-grid">
+          <article><b>01</b><h3>RANKING INDIVIDUAL</h3><p>MMR, rango y posición de cada jugador.</p></article>
+          <article><b>02</b><h3>RANKING DE EQUIPOS</h3><p>Posiciones y rendimiento competitivo.</p></article>
+          <article><b>03</b><h3>TORNEOS</h3><p>Inscripciones, rosters, brackets y resultados.</p></article>
+          <article><b>04</b><h3>COMUNIDAD</h3><p>Una misma plataforma para LATAM y Europa.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rankings" class="section dark-panel">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">COMPETENCIA</span>
+          <h2>RANKINGS</h2>
+        </div>
+      </div>
+
+      <div class="ranking-layout">
+        <article class="ranking-card">
+          <div class="card-title">
+            <span>01</span>
+            <h3>RANKING INDIVIDUAL</h3>
+            <small>MMR</small>
+          </div>
+          <div id="players-ranking" class="ranking-list">
+            <div class="ranking-row"><b>01</b><span class="avatar"></span><strong>Datos en vivo</strong><em>—</em></div>
+            <div class="ranking-row"><b>02</b><span class="avatar"></span><strong>Conectado a PostgreSQL</strong><em>—</em></div>
+            <div class="ranking-row"><b>03</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
+            <div class="ranking-row"><b>04</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
+            <div class="ranking-row"><b>05</b><span class="avatar"></span><strong>Próximamente</strong><em>—</em></div>
+          </div>
+          <a class="card-link" href="#">VER RANKING COMPLETO →</a>
+        </article>
+
+        <article class="ranking-card">
+          <div class="card-title">
+            <span>02</span>
+            <h3>RANKING DE EQUIPOS</h3>
+            <small>MMR</small>
+          </div>
+          <div id="teams-ranking" class="ranking-list">
+            <div class="ranking-row team-row"><b>01</b><span class="team-logo">PL</span><strong>Equipo líder</strong><em>—</em></div>
+            <div class="ranking-row team-row"><b>02</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
+            <div class="ranking-row team-row"><b>03</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
+            <div class="ranking-row team-row"><b>04</b><span class="team-logo">PL</span><strong>Equipo registrado</strong><em>—</em></div>
+          </div>
+          <a class="card-link" href="#">VER EQUIPOS →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="torneos" class="section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">EVENTOS</span>
+          <h2>TORNEOS</h2>
+        </div>
+        <a class="btn btn-ghost" href="#">CALENDARIO</a>
+      </div>
+      <div class="tournament-grid">
+        <article class="tournament-card featured">
+          <span class="status">PRÓXIMAMENTE</span>
+          <div>
+            <span class="event-type">PRESTIGE LEAGUE</span>
+            <h3>PRÓXIMO TORNEO</h3>
+            <p>Inscripciones · Rosters · Bracket · Resultados</p>
+          </div>
+          <a href="#" class="card-link">VER EVENTO →</a>
+        </article>
+        <article class="tournament-card">
+          <span class="status">ARCHIVO</span>
+          <div><span class="event-type">TORNEO</span><h3>HISTORIAL</h3><p>Todos los eventos anteriores de Prestige League.</p></div>
+          <a href="#" class="card-link">VER HISTORIAL →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="equipos" class="section teams-section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">ORGANIZACIONES</span>
+          <h2>EQUIPOS</h2>
+        </div>
+        <a class="card-link" href="#">VER TODOS →</a>
+      </div>
+      <div class="team-placeholder-grid">
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+      </div>
+    </section>
+
+    <section id="info" class="section info-section">
+      <div class="info-box">
+        <span class="section-kicker">PRESTIGE LEAGUE</span>
+        <h2>TODO LO QUE NECESITÁS<br>PARA SEGUIR LA COMPETENCIA.</h2>
+        <p>
+          Información del modo liga, sistema de MMR, rangos, jugadores,
+          equipos, reglamento y todo lo relacionado con los torneos.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#">CÓMO FUNCIONA</a>
+          <a class="btn btn-ghost" href="#">REGLAMENTO</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/prestige-logo.png" alt="Prestige League" />
+    <div>
+      <strong>PRESTIGE LEAGUE</strong>
+      <span>LATAM · EUROPA · BLACK OPS 2</span>
+    </div>
+    <small>© 2026 Prestige League</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
