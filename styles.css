@@ -125,3 +125,117 @@ body.app-home .page-view { display:none; }
   .chat-form { grid-template-columns:1fr; }
   .chat-message { max-width:92%; }
 }
+
+/* V10 — navegación por vistas: nunca se muestra la página larga completa */
+body { min-height:100vh; }
+.route-view { display:none !important; min-height:calc(100vh - 86px); }
+.route-view.active { display:block !important; }
+.site-header { position:sticky; top:0; z-index:50; }
+.brand { background:none; border:0; padding:0; cursor:pointer; }
+.nav button { background:none; border:0; color:inherit; font:inherit; cursor:pointer; padding:0; }
+.nav button:hover { color:var(--orange); }
+.home-cards { max-width:1200px; margin:0 auto; padding:42px 7vw 90px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.home-card { text-align:left; border:1px solid var(--line); background:#0d0d0f; color:#fff; padding:26px; min-height:150px; cursor:pointer; transition:.2s; }
+.home-card:hover { border-color:rgba(255,118,0,.55); transform:translateY(-2px); }
+.home-card span { color:var(--orange); font-size:10px; font-weight:800; display:block; margin-bottom:28px; }
+.home-card b { display:block; font:800 28px "Barlow Condensed",sans-serif; }
+.home-card small { display:block; color:#777; margin-top:8px; line-height:1.5; }
+.page-header { max-width:1100px; margin:0 auto; padding:70px 7vw 28px; }
+.page-header h2 { font:900 clamp(64px,9vw,120px) "Barlow Condensed",sans-serif; margin:5px 0; }
+.page-header p { color:#999; max-width:720px; line-height:1.7; }
+.back-home { background:none; border:0; color:#777; cursor:pointer; font-size:10px; font-weight:800; letter-spacing:.1em; padding:0; margin-bottom:28px; }
+.back-home:hover { color:var(--orange); }
+.page-tabs { max-width:1100px; margin:0 auto 24px; padding:0 7vw; display:flex; border-bottom:1px solid var(--line); }
+.content-tab { background:none; border:0; color:#666; padding:15px 18px; cursor:pointer; font-size:10px; font-weight:800; letter-spacing:.12em; }
+.content-tab.active { color:var(--orange); border-bottom:2px solid var(--orange); }
+.tab-panel { max-width:1100px; margin:0 auto; padding:20px 7vw 90px; display:none; }
+.tab-panel.active { display:block; }
+.info-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.info-cards.large { grid-template-columns:repeat(2,1fr); max-width:1100px; margin:0 auto; padding:20px 7vw 90px; }
+.info-cards article, .rules-grid article, .tournament-card { border:1px solid var(--line); background:#0d0d0f; padding:24px; }
+.info-cards b, .rules-grid b { color:var(--orange); font-size:10px; letter-spacing:.1em; }
+.info-cards p, .rules-grid p, .tournament-card p { color:#999; line-height:1.7; font-size:12px; }
+.panel-heading { margin-bottom:18px; }
+.panel-heading h3 { font:800 46px "Barlow Condensed",sans-serif; margin:4px 0; }
+.ranking-list { border-top:1px solid var(--line); }
+.ranking-row { display:grid; grid-template-columns:55px 1fr 120px; align-items:center; padding:15px 10px; border-bottom:1px solid var(--line); }
+.ranking-row b { color:#555; }
+.ranking-row span { text-align:right; color:var(--orange); font-weight:800; }
+.rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.rules-grid .wide { grid-column:1/-1; }
+.tournament-grid { max-width:1100px; margin:0 auto; padding:20px 7vw 90px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.tournament-card { min-height:220px; }
+.tournament-card h3 { font:800 38px "Barlow Condensed",sans-serif; margin:10px 0; }
+.tournament-card strong { color:var(--orange); }
+.registration-form { max-width:1100px; margin:0 auto; padding:20px 7vw 90px; }
+.registration-form .form-grid, .players-form-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.registration-form label { display:flex; flex-direction:column; gap:7px; color:#aaa; font-size:10px; font-weight:800; letter-spacing:.08em; margin-bottom:16px; }
+.registration-form input { background:#09090a; border:1px solid #303034; color:#fff; padding:13px; outline:none; }
+.registration-form input:focus { border-color:var(--orange); }
+.players-title { display:flex; align-items:end; gap:12px; margin:25px 0 16px; border-top:1px solid var(--line); padding-top:25px; }
+.players-title small { color:#666; font-size:10px; }
+.payment-box { margin:22px 0; padding:22px; border:1px solid rgba(255,118,0,.35); background:rgba(255,118,0,.07); display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.payment-box strong { font:800 42px "Barlow Condensed",sans-serif; }
+.payment-box p { color:#888; font-size:11px; }
+.registration-message { min-height:20px; font-size:11px; }
+.registration-message.success { color:#8fd18f; }
+.registration-message.error { color:#ff8a8a; }
+.chat-shell { max-width:1000px; margin:0 auto; border:1px solid var(--line); background:#0d0d0f; }
+.chat-messages { min-height:430px; max-height:560px; overflow:auto; padding:22px; display:flex; flex-direction:column; gap:12px; }
+.chat-message { max-width:80%; padding:13px 15px; border:1px solid var(--line); background:#111113; display:flex; flex-direction:column; gap:5px; font-size:12px; }
+.chat-message.staff { border-left:3px solid var(--orange); }
+.chat-message.user { align-self:flex-end; }
+.chat-message b { color:var(--orange); font-size:10px; }
+.chat-message span { color:#aaa; line-height:1.5; }
+.chat-form { display:grid; grid-template-columns:180px 1fr auto; gap:10px; padding:15px; border-top:1px solid var(--line); }
+.chat-form input { background:#09090a; border:1px solid #303034; color:#fff; padding:13px; }
+.staff-chat-fab { position:fixed; right:24px; bottom:24px; z-index:60; border:1px solid rgba(255,118,0,.5); background:#101012; color:var(--orange); padding:13px 18px; font-size:10px; font-weight:900; letter-spacing:.1em; cursor:pointer; }
+.center { text-align:center; }
+.center p { margin:0 auto 25px; }
+footer { display:flex; justify-content:center; align-items:center; gap:14px; padding:30px; border-top:1px solid var(--line); color:#666; font-size:10px; }
+footer img { width:34px; }
+@media(max-width:800px){
+  .nav { display:none; }
+  .home-cards, .info-cards, .info-cards.large, .tournament-grid, .rules-grid, .registration-form .form-grid, .players-form-grid { grid-template-columns:1fr; }
+  .rules-grid .wide { grid-column:auto; }
+  .payment-box { flex-direction:column; align-items:flex-start; }
+  .chat-form { grid-template-columns:1fr; }
+  .ranking-row { grid-template-columns:35px 1fr 90px; }
+}
+
+/* V11 — inscripción integrada dentro de Próximo Torneo */
+.upcoming-tournament {
+  max-width:1100px; margin:0 auto; padding:28px 7vw;
+  display:grid; grid-template-columns:1fr 280px; gap:16px;
+}
+.tournament-main, .tournament-status {
+  border:1px solid var(--line); background:#0d0d0f; padding:30px;
+}
+.tournament-main { border-color:rgba(255,118,0,.4); }
+.tournament-main h3 { font:900 48px "Barlow Condensed",sans-serif; margin:10px 0 18px; }
+.tournament-main p { color:#999; line-height:1.7; max-width:680px; }
+.tournament-main strong { color:var(--orange); }
+.tournament-date { display:flex; align-items:center; gap:12px; margin:4px 0 15px; }
+.tournament-date strong { font:900 82px/0.8 "Barlow Condensed",sans-serif; }
+.tournament-date span { color:#aaa; font-size:11px; font-weight:800; letter-spacing:.12em; line-height:1.35; }
+.tournament-status { display:flex; flex-direction:column; justify-content:center; }
+.tournament-status span { color:#777; font-size:10px; font-weight:800; letter-spacing:.12em; }
+.tournament-status strong { color:var(--orange); font:900 38px "Barlow Condensed",sans-serif; margin:5px 0; }
+.tournament-status small { color:#666; line-height:1.5; }
+.tournament-info-block {
+  max-width:1100px; margin:0 auto 24px; padding:30px 7vw;
+  border:1px solid var(--line); background:#0d0d0f;
+}
+.tournament-info-block h3 { font:900 44px "Barlow Condensed",sans-serif; margin:6px 0; }
+.block-copy { color:#888; max-width:760px; line-height:1.7; }
+.embedded-registration { max-width:none; margin:0; padding:22px 0 0; }
+.tournament-history {
+  max-width:1100px; margin:0 auto; padding:0 7vw 90px;
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
+}
+.tournament-history article { border:1px solid var(--line); background:#0d0d0f; padding:24px; }
+.tournament-history h3 { font:800 34px "Barlow Condensed",sans-serif; margin:8px 0; }
+.tournament-history p { color:#777; font-size:12px; line-height:1.6; }
+@media(max-width:800px){
+  .upcoming-tournament, .tournament-history { grid-template-columns:1fr; }
+}
