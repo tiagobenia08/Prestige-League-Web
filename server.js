@@ -40,7 +40,7 @@ app.get("/api/home", async (_req, res) => {
       stats: counts.rows[0],
       players,
       teams,
-      discord_url: process.env.DISCORD_INVITE_URL || ""
+      discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ"
     });
   } catch (e) {
     console.error(e);
