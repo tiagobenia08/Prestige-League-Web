@@ -1,197 +1,330 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prestige League</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prestige League — comunidad competitiva de Call of Duty: Black Ops 2 en LATAM y Europa." />
+  <title>Prestige League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="app-home">
-<header class="site-header">
-  <button class="brand nav-route" data-route="home" aria-label="Prestige League">
-    <img src="assets/prestige-logo.png" alt="Prestige League">
-  </button>
-  <nav class="nav">
-    <button class="nav-route" data-route="liga">LIGA</button>
-    <button class="nav-route" data-route="torneos">TORNEOS</button>
-    <button class="nav-route" data-route="info">INFORMACIÓN</button>
-    <button class="nav-route" data-route="discord">DISCORD</button>
-  </nav>
-  <button class="discord-btn nav-route" data-route="discord">DISCORD</button>
-</header>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Prestige League">
+      <img src="assets/prestige-logo.png" alt="Prestige League" />
+    </a>
+    <nav class="nav">
+      <a href="#liga">Liga</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#torneos">Torneos</a>
+      <a href="#equipos">Equipos</a>
+      <a href="#info">Información</a>
+    </nav>
+    <a id="discord-btn" class="discord-btn" href="https://discord.gg/bRDKns4TQ" target="_blank" rel="noopener noreferrer" aria-label="Discord">DISCORD</a>
+  </header>
 
-<main id="view-home" class="route-view active">
-  <section class="hero home-hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <span class="eyebrow">LATAM · EUROPA · BLACK OPS 2</span>
-      <h1>PRESTIGE<br><span>LEAGUE</span></h1>
-      <p class="hero-copy">La liga competitiva de Black Ops 2 con rankings, equipos, jugadores y torneos en un solo lugar.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary nav-route" data-route="liga">IR A LIGA →</button>
-        <button class="btn btn-ghost nav-route" data-route="torneos">VER TORNEOS →</button>
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <span class="eyebrow">LATAM · EUROPA · BLACK OPS 2</span>
+        <h1>PRESTIGE<br><span>LEAGUE</span></h1>
+        <p class="hero-copy">
+          La liga competitiva de Black Ops 2 con una comunidad internacional.
+          Rankings, equipos, jugadores y torneos en un solo lugar.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#rankings">VER RANKINGS</a>
+          <a class="btn btn-ghost" href="#torneos">VER TORNEOS</a>
+        </div>
+        <div class="regions">
+          <div><strong>LATAM</strong><span>REGIÓN ACTIVA</span></div>
+          <div><strong>EUROPA</strong><span>REGIÓN ACTIVA</span></div>
+          <div><strong>01</strong><span>COMUNIDAD GLOBAL</span></div>
+        </div>
+        <div class="home-highlight">
+          <div>
+            <span>PRÓXIMO TORNEO</span>
+            <strong>14 DE SETIEMBRE</strong>
+            <small>Inscripción de equipos · $25 USD</small>
+          </div>
+          <a href="#torneos">VER TORNEO →</a>
+        </div>
       </div>
-      <div class="regions">
-        <div><strong>LATAM</strong><span>REGIÓN ACTIVA</span></div>
-        <div><strong>EUROPA</strong><span>REGIÓN ACTIVA</span></div>
-        <div><strong id="stat-players">—</strong><span>JUGADORES</span></div>
-        <div><strong id="stat-teams">—</strong><span>EQUIPOS</span></div>
+    </section>
+
+    <section class="stats-strip">
+      <div><strong id="stat-players">400+</strong><span>JUGADORES</span></div>
+      <div><strong>2</strong><span>REGIONES ACTIVAS</span></div>
+      <div><strong>24/7</strong><span>COMUNIDAD ACTIVA</span></div>
+      <div><strong>∞</strong><span>COMPETENCIA</span></div>
+    </section>
+
+    <section id="liga" class="section split">
+      <div>
+        <span class="section-kicker">MODO LIGA</span>
+        <h2>COMPETÍ.<br>SUBÍ. <span>DOMINÁ.</span></h2>
       </div>
-    </div>
-  </section>
-
-  <section class="home-cards">
-    <button class="home-card nav-route" data-route="liga"><span>01</span><b>LIGA</b><small>Ranking · Reglamento · Info</small></button>
-    <button class="home-card nav-route" data-route="torneos"><span>02</span><b>TORNEOS</b><small>Inscripciones · Activos · Próximos · Historial</small></button>
-    <button class="home-card nav-route" data-route="info"><span>03</span><b>INFORMACIÓN</b><small>Prestige League y funcionamiento</small></button>
-    <button class="home-card nav-route" data-route="discord"><span>04</span><b>DISCORD</b><small>Comunidad oficial</small></button>
-  </section>
-</main>
-
-<main id="view-liga" class="route-view">
-  <section class="page-header">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">PRESTIGE LEAGUE</span>
-    <h2>LIGA</h2>
-    <p>Todo lo necesario para competir en el Modo Liga.</p>
-  </section>
-  <div class="page-tabs">
-    <button class="content-tab active" data-tab="liga-info">INFO</button>
-    <button class="content-tab" data-tab="liga-ranking">RANKING</button>
-    <button class="content-tab" data-tab="liga-reglamento">REGLAMENTO</button>
-  </div>
-  <section class="tab-panel active" data-panel="liga-info">
-    <div class="info-cards">
-      <article><b>REGISTRO</b><p>Usá <strong>/register</strong> para registrar tu ID de PSN.</p></article>
-      <article><b>MMR</b><p>Consultá tu MMR y rango con <strong>/mmr</strong>. El inicio es 1000 MMR.</p></article>
-      <article><b>QUEUE</b><p>La búsqueda se realiza desde Discord. La cola tiene un máximo de 8 jugadores.</p></article>
-      <article><b>PARTY</b><p>Las Parties permiten mantener juntos a sus integrantes durante el matchmaking.</p></article>
-      <article><b>RESULTADOS</b><p>El resultado se publica con <strong>/resultado</strong> y un jugador del equipo rival debe confirmarlo.</p></article>
-      <article><b>HOST</b><p>Con 8 jugadores el bot selecciona un host al azar para crear la partida privada.</p></article>
-    </div>
-  </section>
-  <section class="tab-panel" data-panel="liga-ranking">
-    <div class="panel-heading"><span class="section-kicker">CLASIFICACIÓN</span><h3>RANKING</h3></div>
-    <div id="full-players-ranking" class="ranking-list"></div>
-  </section>
-  <section class="tab-panel" data-panel="liga-reglamento">
-    <div class="rules-grid">
-      <article><b>CONDUCTA</b><p>No está permitido insultar, acosar, abandonar intencionalmente, sabotear, manipular resultados, aprovechar errores del sistema ni utilizar trampas.</p></article>
-      <article><b>DESCONEXIONES</b><p>Se evaluarán según la situación y las pruebas disponibles. No se puede abandonar una partida para evitar una derrota.</p></article>
-      <article><b>RESULTADOS</b><p>Los resultados deben registrarse correctamente. Falsearlos o manipularlos será sancionado.</p></article>
-      <article><b>SANCIONES</b><p>Advertencia → anulación → pérdida/ajuste de MMR → suspensión → expulsión.</p></article>
-      <article class="wide"><b>BANEOS DEL MODO LIGA</b><p><strong>Armas:</strong> Silenciador, FAL, Target Finder, pistola a dos manos y lanzagranadas como accesorio.</p><p><strong>Rachas/equipamiento:</strong> UAV, Counter UAV, Sentry, Guardian, Paquete de ayuda, Cazador y VSAT.</p><p><strong>Ventajas:</strong> Fantasma y Línea Dura.</p></article>
-    </div>
-  </section>
-</main>
-
-<main id="view-torneos" class="route-view">
-  <section class="page-header">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">COMPETENCIA</span>
-    <h2>TORNEOS</h2>
-    <p>Información, calendario e inscripciones de Prestige League.</p>
-  </section>
-
-  <section class="upcoming-tournament">
-    <div class="tournament-main">
-      <span class="section-kicker">PRÓXIMO TORNEO</span>
-      <h3>PRESTIGE LEAGUE</h3>
-      <div class="tournament-date"><strong>14</strong><span>SEPTIEMBRE<br>2026</span></div>
-      <p>El próximo torneo comenzará el <strong>14 de septiembre de 2026</strong>. La inscripción es de <strong>USD 25 por equipo</strong>.</p>
-    </div>
-
-    <div class="tournament-status">
-      <span>INSCRIPCIONES</span>
-      <strong>ABIERTAS</strong>
-      <small>Hasta completar los cupos disponibles.</small>
-    </div>
-  </section>
-
-  <section class="tournament-info-block">
-    <div class="section-kicker">INSCRIPCIÓN AL PRÓXIMO TORNEO</div>
-    <h3>REGISTRÁ TU EQUIPO</h3>
-    <p class="block-copy">Completá los datos del equipo y realizá el pago de USD 25 mediante PayPal. La inscripción queda pendiente hasta que la organización verifique el pago.</p>
-
-    <form id="registration-form" class="registration-form embedded-registration">
-      <div class="form-grid">
-        <label>Nombre del equipo *<input name="team_name" required maxlength="80"></label>
-        <label>País *<input name="country" required maxlength="60"></label>
-        <label>Contacto del capitán *<input name="captain_contact" required maxlength="40"></label>
+      <div class="section-text">
+        <p>
+          Prestige League mantiene la búsqueda de partidas dentro de Discord.
+          La web es el centro oficial para consultar la competición, seguir
+          rankings y conocer a los jugadores y equipos.
+        </p>
+        <div class="feature-grid">
+          <article><b>01</b><h3>RANKING INDIVIDUAL</h3><p>MMR, rango y posición de cada jugador.</p></article>
+          <article><b>02</b><h3>RANKING DE EQUIPOS</h3><p>Posiciones y rendimiento competitivo.</p></article>
+          <article><b>03</b><h3>TORNEOS</h3><p>Inscripciones, rosters, brackets y resultados.</p></article>
+          <article><b>04</b><h3>COMUNIDAD</h3><p>Una misma plataforma para LATAM y Europa.</p></article>
+        </div>
       </div>
-      <div class="players-title"><span class="section-kicker">JUGADORES</span><small>Máximo 6</small></div>
-      <div class="players-form-grid">
-        <label>Jugador 1 *<input name="player_1" required maxlength="32" placeholder="ID de PSN"></label>
-        <label>Jugador 2 *<input name="player_2" required maxlength="32" placeholder="ID de PSN"></label>
-        <label>Jugador 3 *<input name="player_3" required maxlength="32" placeholder="ID de PSN"></label>
-        <label>Jugador 4 *<input name="player_4" required maxlength="32" placeholder="ID de PSN"></label>
-        <label>Jugador 5<input name="player_5" maxlength="32" placeholder="ID de PSN"></label>
-        <label>Jugador 6<input name="player_6" maxlength="32" placeholder="ID de PSN"></label>
+    </section>
+
+    <section id="liga-info" class="section league-info-section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">PRESTIGE LEAGUE</span>
+          <h2>MODO LIGA<br><span>INFO</span></h2>
+        </div>
       </div>
-      <div class="payment-box">
-        <div><strong>USD 25</strong><p>Realizá el pago antes de enviar la inscripción.</p></div>
-        <a class="btn btn-primary" href="https://paypal.me/prestigeleaguetorneo/25USD" target="_blank" rel="noopener noreferrer">PAGAR CON PAYPAL →</a>
+
+      <div class="league-info-grid">
+        <article class="league-info-card">
+          <span class="info-number">01</span>
+          <h3>REGISTRO</h3>
+          <p>Registrá tu ID de PSN con <strong>/register</strong>. El ID debe ser correcto porque se utiliza para organizar las partidas.</p>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">02</span>
+          <h3>MMR Y RANGOS</h3>
+          <p>Consultá tu MMR y rango con <strong>/mmr</strong>. Todos comienzan en <strong>1000 MMR</strong> y el valor cambia según los resultados.</p>
+          <div class="rank-list">
+            <div><b>Hierro</b><em>1000–1099</em></div>
+            <div><b>Bronce</b><em>1100–1299</em></div>
+            <div><b>Plata</b><em>1300–1599</em></div>
+            <div><b>Oro</b><em>1600–1999</em></div>
+            <div><b>Platino</b><em>2000–2499</em></div>
+            <div><b>Maestro</b><em>2500+</em></div>
+          </div>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">03</span>
+          <h3>PARTY</h3>
+          <p>Las Parties permiten mantener a sus integrantes juntos en el mismo equipo.</p>
+          <div class="commands">
+            <code>/party crear</code><span>Crear</span>
+            <code>/party estado</code><span>Ver integrantes</span>
+            <code>/party salir</code><span>Salir</span>
+            <code>/party expulsar</code><span>Expulsar</span>
+          </div>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">04</span>
+          <h3>BÚSQUEDA DE PARTIDA</h3>
+          <p>Elegí la cola correspondiente desde Discord:</p>
+          <div class="queue-box"><strong>LATAM QUEUE</strong><strong>EUROPA QUEUE</strong></div>
+          <p>Entrá o salí mediante los botones <strong>JOIN QUEUE</strong> y <strong>LEAVE QUEUE</strong>.</p>
+          <p>La cola admite hasta <strong>8 jugadores</strong>. Las Parties ingresan juntas.</p>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">05</span>
+          <h3>CONFIRMACIÓN</h3>
+          <p>Al completarse los 8 jugadores, el bot envía una confirmación.</p>
+          <p>Cada jugador dispone de <strong>3 minutos</strong> para confirmar su participación.</p>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">06</span>
+          <h3>HOST</h3>
+          <p>El bot selecciona un HOST al azar entre los 8 jugadores.</p>
+          <p>El HOST crea la partida privada, configura las reglas de Ranked e invita al resto. Los demás jugadores deben agregarlo en PSN y esperar la invitación.</p>
+        </article>
+
+        <article class="league-info-card">
+          <span class="info-number">07</span>
+          <h3>RESULTADO</h3>
+          <p>Al finalizar la partida, uno de los jugadores debe publicar el resultado mediante <strong>/resultado</strong>.</p>
+          <p>El resultado debe ser <strong>confirmado por otro jugador del equipo rival</strong> para que quede validado.</p>
+        </article>
+
+        <article class="league-info-card league-team-mode">
+          <span class="info-number">08</span>
+          <h3>LIGA POR EQUIPOS — 4V4</h3>
+          <p>También podés competir en el Modo Liga formando un equipo. Los enfrentamientos son <strong>4 contra 4</strong>, con Team MMR independiente del MMR individual.</p>
+          <div class="team-mode-points">
+            <span>4V4</span>
+            <span>TEAM MMR</span>
+            <span>LATAM / EUROPA</span>
+          </div>
+        </article>
       </div>
-      <label>Referencia del pago *<input name="payment_reference" required maxlength="120" placeholder="ID de transacción o nombre del pagador"></label>
-      <button class="btn btn-primary" type="submit">ENVIAR INSCRIPCIÓN</button>
-      <p id="registration-message" class="registration-message"></p>
-    </form>
-  </section>
 
-  <section class="tournament-history">
-    <article><span class="section-kicker">ACTIVOS</span><h3>TORNEOS ACTIVOS</h3><p>Los torneos actualmente activos aparecerán aquí.</p></article>
-    <article><span class="section-kicker">HISTORIAL</span><h3>TORNEOS ANTERIORES</h3><p>Ediciones anteriores, resultados y campeones.</p></article>
-  </section>
-</main>
+      <div id="reglamento" class="regulation-section">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">NORMAS</span>
+            <h2>REGLAMENTO</h2>
+            <p class="regulation-intro">Estas normas buscan mantener partidas competitivas, equilibradas y transparentes. Todos los participantes deben conocerlas y respetarlas.</p>
+          </div>
+        </div>
 
+        <div class="regulation-grid">
+          <article class="regulation-card">
+            <h3>CONDUCTA</h3>
+            <ul>
+              <li>No se permite insultar, acosar o provocar a otros jugadores.</li>
+              <li>No se permite abandonar partidas intencionalmente.</li>
+              <li>No se permite sabotear una partida.</li>
+              <li>No se permite manipular resultados.</li>
+              <li>No se permite aprovechar errores del sistema para obtener ventajas.</li>
+              <li>No se permite utilizar trampas o métodos externos para obtener ventajas.</li>
+            </ul>
+          </article>
 
+          <article class="regulation-card">
+            <h3>DESCONEXIONES</h3>
+            <p>Las desconexiones y abandonos serán evaluados según la situación y las pruebas disponibles. No se podrá abandonar una partida simplemente para evitar una derrota.</p>
+          </article>
 
-<main id="view-info" class="route-view">
-  <section class="page-header">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">PRESTIGE LEAGUE</span>
-    <h2>INFORMACIÓN</h2>
-  </section>
-  <section class="info-cards large">
-    <article><b>¿QUÉ ES PRESTIGE LEAGUE?</b><p>Una comunidad competitiva de Black Ops 2 con Modo Liga y torneos.</p></article>
-    <article><b>LIGA</b><p>Ranking individual, MMR, equipos, matchmaking y reglamento.</p></article>
-    <article><b>TORNEOS</b><p>Competencias organizadas con inscripción, rosters y resultados.</p></article>
-    <article><b>CONSULTAS</b><p>Para preguntas generales podés usar el chat con el staff. Los resultados o correcciones de MMR se gestionan mediante los tickets de Discord.</p></article>
-  </section>
-</main>
+          <article class="regulation-card">
+            <h3>RESULTADOS</h3>
+            <p>Los resultados deben registrarse correctamente mediante el sistema establecido. Falsear o manipular resultados será sancionado.</p>
+          </article>
 
-<main id="view-discord" class="route-view">
-  <section class="page-header center">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">COMUNIDAD OFICIAL</span>
-    <h2>DISCORD</h2>
-    <p>Entrá al servidor oficial de Prestige League para buscar partidas, usar los comandos, abrir tickets y participar de la comunidad.</p>
-    <a class="btn btn-primary" href="https://discord.gg/bRDKns4TQ" target="_blank" rel="noopener noreferrer">ENTRAR AL DISCORD →</a>
-  </section>
-</main>
+          <article class="regulation-card">
+            <h3>TRAMPAS</h3>
+            <p>Cualquier uso de trampas o métodos destinados a obtener una ventaja ilegítima podrá resultar en pérdida de MMR, suspensión o expulsión del Modo Liga.</p>
+          </article>
 
-<main id="view-chat" class="route-view">
-  <section class="page-header">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">ATENCIÓN AL JUGADOR</span>
-    <h2>CHAT CON STAFF</h2>
-    <p>Consultas generales. Para resultados o correcciones de MMR, utilizá los tickets de Discord.</p>
-  </section>
-  <section class="chat-shell">
-    <div id="staff-chat-messages" class="chat-messages"><div class="chat-message staff"><b>Prestige League Staff</b><span>Un miembro del staff se comunicará contigo pronto.</span></div></div>
-    <form id="staff-chat-form" class="chat-form">
-      <input name="name" required maxlength="60" placeholder="Tu nombre / ID de Discord">
-      <input name="message" required maxlength="1000" placeholder="Escribí tu consulta...">
-      <button class="btn btn-primary" type="submit">ENVIAR</button>
-    </form>
-  </section>
-</main>
+          <article class="regulation-card wide">
+            <h3>SANCIONES</h3>
+            <p>Según la gravedad de la situación, Prestige League podrá aplicar: <strong>Advertencia → Anulación de partida → Pérdida o ajuste de MMR → Suspensión → Expulsión.</strong></p>
+          </article>
 
-<button class="staff-chat-fab nav-route" data-route="chat">CHAT STAFF</button>
-<footer><img src="assets/prestige-logo.png" alt="Prestige League"><span>PRESTIGE LEAGUE · 2026</span></footer>
-<script src="script.js"></script>
+          <article class="regulation-card wide">
+            <h3>BANEOS — MODO LIGA</h3>
+            <p>Para garantizar partidas competitivas y equilibradas, los siguientes elementos están prohibidos durante las partidas del Modo Liga:</p>
+            <div class="ban-groups">
+              <div class="ban-group"><h4>ARMAS Y ACCESORIOS</h4><ul><li>Silenciador</li><li>FAL</li><li>Target Finder</li><li>Pistola a dos manos</li><li>Lanzagranadas como accesorio de arma</li></ul></div>
+              <div class="ban-group"><h4>RACHA / EQUIPAMIENTO</h4><ul><li>UAV</li><li>Counter UAV</li><li>Sentry</li><li>Guardian</li><li>Paquete de ayuda</li><li>Cazador</li><li>VSAT</li></ul></div>
+              <div class="ban-group"><h4>VENTAJAS</h4><ul><li>Fantasma</li><li>Línea Dura</li></ul></div>
+            </div>
+            <div class="regulation-warning"><strong>Importante:</strong> todos los jugadores deben respetar estos baneos durante las partidas de Prestige League. El incumplimiento puede llevar a pérdida de MMR o aislamiento temporal de la Liga.</div>
+          </article>
+
+          <article class="regulation-card wide">
+            <h3>ADMINISTRACIÓN</h3>
+            <p>Prestige League podrá revisar partidas, resultados y situaciones conflictivas para garantizar la integridad competitiva. Las decisiones de la administración deberán respetarse.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rankings" class="section dark-panel">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">COMPETENCIA</span>
+          <h2>RANKINGS</h2>
+        </div>
+
+      </div>
+
+      <div class="ranking-layout">
+        <article class="ranking-card">
+          <div class="card-title">
+            <span>01</span>
+            <h3>RANKING INDIVIDUAL</h3>
+            <small>MMR</small>
+          </div>
+          <div id="players-ranking" class="ranking-list"><div class="ranking-row"><strong>Cargando ranking…</strong></div></div>
+          <button id="players-ranking-toggle" class="card-link card-link-button" type="button">VER RANKING COMPLETO →</button>
+        </article>
+
+        <article class="ranking-card">
+          <div class="card-title">
+            <span>02</span>
+            <h3>RANKING DE EQUIPOS</h3>
+            <small>MMR</small>
+          </div>
+          <div id="teams-ranking" class="ranking-list"><div class="ranking-row team-row"><strong>Cargando ranking…</strong></div></div>
+          <button id="teams-ranking-toggle" class="card-link card-link-button" type="button">VER EQUIPOS →</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="torneos" class="section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">EVENTOS</span>
+          <h2>TORNEOS</h2>
+        </div>
+        <a class="btn btn-ghost" href="#">CALENDARIO</a>
+      </div>
+      <div class="tournament-grid">
+        <article class="tournament-card featured">
+          <span class="status">PRÓXIMAMENTE</span>
+          <div>
+            <span class="event-type">PRESTIGE LEAGUE</span>
+            <h3>PRÓXIMO TORNEO</h3>
+            <p>Inscripciones · Rosters · Bracket · Resultados</p>
+          </div>
+          <a href="#" class="card-link">VER EVENTO →</a>
+        </article>
+        <article class="tournament-card">
+          <span class="status">ARCHIVO</span>
+          <div><span class="event-type">TORNEO</span><h3>HISTORIAL</h3><p>Todos los eventos anteriores de Prestige League.</p></div>
+          <a href="#" class="card-link">VER HISTORIAL →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="equipos" class="section teams-section">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">ORGANIZACIONES</span>
+          <h2>EQUIPOS</h2>
+        </div>
+        <a class="card-link" href="#">VER TODOS →</a>
+      </div>
+      <div class="team-placeholder-grid">
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+        <div class="team-placeholder">LOGO<br><small>EQUIPO</small></div>
+      </div>
+    </section>
+
+    <section id="info" class="section info-section">
+      <div class="info-box">
+        <span class="section-kicker">PRESTIGE LEAGUE</span>
+        <h2>TODO LO QUE NECESITÁS<br>PARA SEGUIR LA COMPETENCIA.</h2>
+        <p>
+          Información del modo liga, sistema de MMR, rangos, jugadores,
+          equipos, reglamento y todo lo relacionado con los torneos.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#liga-info">CÓMO FUNCIONA</a>
+          <a class="btn btn-ghost" href="#reglamento">REGLAMENTO</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/prestige-logo.png" alt="Prestige League" />
+    <div>
+      <strong>PRESTIGE LEAGUE</strong>
+      <span>LATAM · EUROPA · BLACK OPS 2</span>
+    </div>
+    <small>© 2026 Prestige League</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
