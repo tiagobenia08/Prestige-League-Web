@@ -18,6 +18,21 @@ app.get("/api/health", async (_req, res) => {
   }
 });
 
+app.get("/api/discord/members", async (_req, res) => {
+  const invite = process.env.DISCORD_INVITE_CODE || "bRDKns4TQ";
+  try {
+    const response = await fetch(`https://discord.com/api/v10/invites/${encodeURIComponent(invite)}?with_counts=true`);
+    if (!response.ok) throw new Error(`Discord API ${response.status}`);
+    const data = await response.json();
+    const members = Number(data.approximate_member_count);
+    if (!Number.isFinite(members)) throw new Error("member_count_unavailable");
+    res.json({ members });
+  } catch (e) {
+    console.error("Discord member count error:", e.message);
+    res.status(503).json({ error: "discord_count_unavailable" });
+  }
+});
+
 app.get("/api/home", async (_req, res) => {
   try {
     const players = (await pool.query(`
