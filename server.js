@@ -18,49 +18,29 @@ app.get("/api/health", async (_req, res) => {
   }
 });
 
-app.get("/api/discord/members", async (_req, res) => {
-  const invite = process.env.DISCORD_INVITE_CODE || "bRDKns4TQ";
+async function getDiscordMemberCount() {
+  const fallback = Number(process.env.DISCORD_MEMBER_COUNT || 370);
+  const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
   try {
-    const response = await fetch(`https://discord.com/api/v10/invites/${encodeURIComponent(invite)}?with_counts=true`);
-    if (!response.ok) throw new Error(`Discord API ${response.status}`);
+    const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { signal: AbortSignal.timeout(4000) });
+    if (!response.ok) return fallback;
     const data = await response.json();
-    const members = Number(data.approximate_member_count);
-    if (!Number.isFinite(members)) throw new Error("member_count_unavailable");
-    res.json({ members });
-  } catch (e) {
-    console.error("Discord member count error:", e.message);
-    res.status(503).json({ error: "discord_count_unavailable" });
+    return Number(data.approximate_member_count || data.member_count || fallback);
+  } catch {
+    return fallback;
   }
-});
+}
 
 app.get("/api/home", async (_req, res) => {
   try {
-    const players = (await pool.query(`
-      SELECT discord_id, discord_name, psn, mmr, rank
-      FROM players
-      ORDER BY mmr DESC, psn ASC
-      LIMIT 10
-    `)).rows;
-    const teams = (await pool.query(`
-      SELECT team_id, name, mmr, logo_url
-      FROM teams
-      ORDER BY mmr DESC, name ASC
-      LIMIT 10
-    `)).rows;
-    const counts = await pool.query(`
-      SELECT
-        (SELECT COUNT(*)::int FROM players) AS players,
-        (SELECT COUNT(*)::int FROM teams) AS teams
-    `);
+    const discordMembers = await getDiscordMemberCount();
     res.json({
-      stats: counts.rows[0],
-      players,
-      teams,
+      discord_members_count: discordMembers,
       discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ"
     });
   } catch (e) {
     console.error(e);
-    res.status(503).json({ error: "database_unavailable" });
+    res.status(503).json({ error: "database_unavailable", discord_members_count: 370 });
   }
 });
 

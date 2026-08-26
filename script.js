@@ -30,16 +30,15 @@ function showRoute(route) {
 }
 
 async function loadHomeStats() {
-  const el = document.getElementById("stat-players");
-  if (!el) return;
   try {
-    const r = await fetch(`${API_BASE}/api/discord/members`, {cache:"no-store"});
-    if (!r.ok) throw new Error("discord_count_failed");
+    const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
+    if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    if (Number.isFinite(Number(d.members))) {
-      el.textContent = Number(d.members).toLocaleString("es-UY");
-    }
-  } catch {}
+    const members = d.discord_members_count ?? d.stats?.discord_members_count ?? 370;
+    document.getElementById("stat-players").textContent = `${members}+`;
+  } catch {
+    document.getElementById("stat-players").textContent = "370+";
+  }
 }
 
 async function loadRanking() {
@@ -133,5 +132,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => {
     if (document.getElementById("view-chat")?.classList.contains("active")) loadStaffChat();
   }, 5000);
-  setInterval(loadHomeStats, 5 * 60 * 1000);
 });
