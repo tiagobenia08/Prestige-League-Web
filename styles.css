@@ -158,9 +158,13 @@ body { min-height:100vh; }
 .panel-heading { margin-bottom:18px; }
 .panel-heading h3 { font:800 46px "Barlow Condensed",sans-serif; margin:4px 0; }
 .ranking-list { border-top:1px solid var(--line); }
-.ranking-row { display:grid; grid-template-columns:55px 1fr 120px; align-items:center; padding:15px 10px; border-bottom:1px solid var(--line); }
+.ranking-row { display:grid; grid-template-columns:55px minmax(0,1fr) 130px 120px; align-items:center; gap:14px; padding:13px 10px; border-bottom:1px solid var(--line); }
 .ranking-row b { color:#555; }
-.ranking-row span { text-align:right; color:var(--orange); font-weight:800; }
+.ranking-row strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ranking-row .rank-cell { display:flex; align-items:center; justify-content:flex-start; gap:9px; color:#ddd; font-weight:800; }
+.ranking-row .rank-cell img { width:38px; height:38px; object-fit:contain; flex:none; }
+.ranking-row .rank-cell small { color:#aaa; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.ranking-row .mmr-cell { text-align:right; color:var(--orange); font-weight:800; }
 .rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .rules-grid .wide { grid-column:1/-1; }
 .tournament-grid { max-width:1100px; margin:0 auto; padding:20px 7vw 90px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -200,7 +204,9 @@ footer img { width:34px; }
   .rules-grid .wide { grid-column:auto; }
   .payment-box { flex-direction:column; align-items:flex-start; }
   .chat-form { grid-template-columns:1fr; }
-  .ranking-row { grid-template-columns:35px 1fr 90px; }
+  .ranking-row { grid-template-columns:35px minmax(0,1fr) 105px 85px; gap:8px; }
+  .ranking-row .rank-cell small { display:none; }
+  .ranking-row .rank-cell img { width:34px; height:34px; }
 }
 
 /* V11 — inscripción integrada dentro de Próximo Torneo */
@@ -318,36 +324,4 @@ footer img { width:34px; }
   #view-liga .rules-grid p,
   #view-info .info-cards p { font-size:14px; }
   .footer-socials { width:100%; justify-content:flex-start; }
-}
-
-/* V14 — Historial de torneos y reglamento ampliado */
-.tournament-history-section { max-width:1200px; margin:0 auto; padding:25px 7vw 95px; }
-.history-heading { margin-bottom:28px; }
-.history-heading h3 { font:900 clamp(48px,6vw,76px) "Barlow Condensed",sans-serif; margin:8px 0; }
-.history-heading p { color:#888; line-height:1.7; margin:0; }
-.history-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.history-card { border:1px solid var(--line); background:#0d0d0f; overflow:hidden; transition:.2s; }
-.history-card:hover { border-color:rgba(255,118,0,.55); transform:translateY(-2px); }
-.history-card img { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; background:#080808; }
-.history-card div { padding:22px; }
-.history-card h4 { font:800 31px "Barlow Condensed",sans-serif; margin:7px 0; }
-.history-card p { color:#777; font-size:12px; line-height:1.6; margin:0; }
-.regulation-web-card { grid-column:1/-1; }
-.ban-groups-web { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:20px; }
-.ban-groups-web > div { border:1px solid rgba(255,255,255,.07); padding:20px; background:rgba(255,255,255,.018); }
-.ban-groups-web strong { color:var(--orange); font-size:11px; letter-spacing:.08em; }
-.ban-groups-web ul { margin:10px 0 0; padding-left:18px; color:#aaa; line-height:1.85; font-size:13px; }
-.ban-groups-web li::marker { color:var(--orange); }
-.regulation-warning-web { margin-top:20px; padding:16px 18px; border-left:3px solid var(--orange); background:rgba(255,118,0,.07); color:#aaa; }
-#view-liga .info-cards p, #view-info .info-cards p { font-size:16px; line-height:1.9; }
-#view-liga .rules-grid p { font-size:16px; line-height:1.9; }
-#view-liga .info-cards b, #view-liga .rules-grid b, #view-info .info-cards b { font-size:12px; }
-@media(max-width:1000px){
-  .history-gallery { grid-template-columns:1fr; }
-  .ban-groups-web { grid-template-columns:1fr 1fr; }
-}
-@media(max-width:800px){
-  .ban-groups-web { grid-template-columns:1fr; }
-  #view-liga .info-cards p, #view-liga .rules-grid p, #view-info .info-cards p { font-size:14px; }
-  .history-card img { aspect-ratio:16/9; }
 }

@@ -1,20 +1,34 @@
-const API_BASE = "";
-const DISCORD_INVITE = "https://discord.gg/bRDKns4TQ";
 
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
-  }[c]));
+function displayValue(value) {
+  if (Array.isArray(value)) return value.length;
+  if (value && typeof value === "object") {
+    if ("length" in value) return value.length;
+    if ("count" in value) return value.count;
+    if ("total" in value) return value.total;
+  }
+  return value ?? 0;
 }
 
-function setMemberCount(value) {
-  const count = Number(value);
-  const text = Number.isFinite(count) && count > 0 ? String(Math.round(count)) : "—";
-  const ids = ["stat-players", "discord-members-card", "discord-members-social", "discord-members-page"];
-  ids.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = text;
-  });
+const API_BASE = "";
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+// Rangos oficiales del Modo Liga, iguales a los del bot de Discord.
+const RANKS = [
+  { name: "Hierro", min: 1000, max: 1100, icon: "assets/ranks/hierro.png" },
+  { name: "Bronce", min: 1100, max: 1300, icon: "assets/ranks/bronce.png" },
+  { name: "Plata", min: 1300, max: 1600, icon: "assets/ranks/plata.png" },
+  { name: "Oro", min: 1600, max: 2000, icon: "assets/ranks/oro.png" },
+  { name: "Platino", min: 2000, max: 2500, icon: "assets/ranks/platino.png" },
+  { name: "Maestro", min: 2500, max: Infinity, icon: "assets/ranks/maestro.png" }
+];
+
+function getRank(mmr) {
+  const value = Number(mmr) || 0;
+  if (value < 1000) return RANKS[0];
+  return RANKS.find(rank => value >= rank.min && value < rank.max) || RANKS[RANKS.length - 1];
 }
 
 function showRoute(route) {
@@ -31,20 +45,15 @@ function showRoute(route) {
   history.replaceState(null, "", route === "home" ? "/" : `#${route}`);
 }
 
-async function fetchHome() {
-  const r = await fetch(`${API_BASE}/api/home`, { cache: "no-store" });
-  if (!r.ok) throw new Error(`API ${r.status}`);
-  return r.json();
-}
-
 async function loadHomeStats() {
   try {
-    const data = await fetchHome();
-    setMemberCount(data.discord_members_count ?? data.stats?.discord_members_count);
-    const discordButton = document.getElementById("discord-btn");
-    if (discordButton) discordButton.href = data.discord_url || DISCORD_INVITE;
-  } catch (error) {
-    console.error("No se pudo cargar la cantidad de miembros de Discord:", error);
+    const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+    const members = d.discord_members_count ?? d.stats?.discord_members_count ?? 370;
+    document.getElementById("stat-players").textContent = `${members}+`;
+  } catch {
+    document.getElementById("stat-players").textContent = "370+";
   }
 }
 
@@ -52,21 +61,20 @@ async function loadRanking() {
   const el = document.getElementById("full-players-ranking");
   if (!el) return;
   try {
-    const r = await fetch(`${API_BASE}/api/rankings/players`, { cache: "no-store" });
-    if (!r.ok) throw new Error(`API ${r.status}`);
+    const r = await fetch(`${API_BASE}/api/rankings/players`, {cache:"no-store"});
     const players = await r.json();
-    if (!Array.isArray(players) || !players.length) {
-      el.innerHTML = "<p>No hay jugadores registrados.</p>";
-      return;
-    }
-    el.innerHTML = players.map((p,i) => `
+    el.innerHTML = players.map((p,i) => {
+      const mmr = Math.round(Number(p.mmr) || 0);
+      const rank = getRank(mmr);
+      return `
       <div class="ranking-row">
         <b>${i+1}</b>
-        <strong>${escapeHtml(p.psn || p.discord_name || "Jugador")}</strong>
-        <span>${Math.round(Number(p.mmr)||0)} MMR</span>
-      </div>`).join("");
-  } catch (error) {
-    console.error("No se pudo cargar el ranking:", error);
+        <strong>${escapeHtml(p.psn || p.name || "Jugador")}</strong>
+        <span class="rank-cell"><img src="${rank.icon}" alt="${rank.name}" title="${rank.name}"><small>${rank.name}</small></span>
+        <span class="mmr-cell">${mmr} MMR</span>
+      </div>`;
+    }).join("");
+  } catch {
     el.innerHTML = "<p>No se pudo cargar el ranking.</p>";
   }
 }
@@ -84,10 +92,9 @@ async function submitRegistration(e) {
     const out = await r.json();
     if (!r.ok) throw new Error(out.error || "error");
     msg.className = "registration-message success";
-    msg.textContent = `Inscripción recibida. N.º ${out.registration_id ?? ""}. Queda pendiente de verificación del pago.`;
+    msg.textContent = `Inscripción recibida. N.º ${out.registration?.id ?? ""}. Queda pendiente de verificación del pago.`;
     form.reset();
-  } catch (error) {
-    console.error(error);
+  } catch {
     msg.className = "registration-message error";
     msg.textContent = "No pudimos registrar la inscripción. Revisá los datos e intentá nuevamente.";
   }
@@ -105,9 +112,7 @@ async function loadStaffChat() {
         <b>${escapeHtml(m.sender_name)}</b><span>${escapeHtml(m.message)}</span>
       </div>`).join("");
     el.scrollTop = el.scrollHeight;
-  } catch (error) {
-    console.error("No se pudo cargar el chat:", error);
-  }
+  } catch {}
 }
 
 async function submitStaffChat(e) {
@@ -126,22 +131,8 @@ async function submitStaffChat(e) {
   }
 }
 
-async function refreshLiveData() {
-  await loadHomeStats();
-  const rankingView = document.getElementById("view-liga");
-  const rankingPanel = document.querySelector('#view-liga .content-tab.active[data-tab="liga-ranking"]');
-  if (rankingView?.classList.contains("active") && rankingPanel) {
-    await loadRanking();
-  }
-  if (document.getElementById("view-chat")?.classList.contains("active")) {
-    await loadStaffChat();
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".nav-route").forEach(btn => {
-    btn.addEventListener("click", () => showRoute(btn.dataset.route));
-  });
+  document.querySelectorAll(".nav-route").forEach(btn => btn.addEventListener("click", () => showRoute(btn.dataset.route)));
 
   document.querySelectorAll("#view-liga .content-tab").forEach(tab => {
     tab.addEventListener("click", () => {
@@ -159,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const hash = location.hash.replace("#","");
   showRoute(["liga","torneos","info","discord","chat"].includes(hash) ? hash : "home");
-
-  // Mantiene Home y Ranking actualizados sin tener que recargar la página.
-  setInterval(refreshLiveData, 10000);
+  setInterval(() => {
+    if (document.getElementById("view-chat")?.classList.contains("active")) loadStaffChat();
+  }, 5000);
 });
