@@ -1,27 +1,17 @@
-# Prestige League Web — V1
+# Prestige League Web — actualización
 
-Primera versión visual de la web oficial de Prestige League.
+Incluye:
+- navegación multipágina por vistas (Home / Liga / Torneos / Información / Discord / Chat Staff);
+- contador de jugadores basado en el servidor de Discord, mostrado como número exacto y sin `+`;
+- ranking individual conectado a PostgreSQL;
+- actualización automática del contador y ranking mientras la web está abierta;
+- inscripción dentro del apartado Próximo Torneo del 14 de septiembre de 2026;
+- historial de la Primera Edición (6–12 de agosto de 2026) con Team Pool, Bracket y Campeones;
+- reglamento actualizado con C4, Inserción táctica y Virote Triple, además de la lista completa del documento de reglamento;
+- chat general con Staff y mensaje automático;
+- links oficiales de Discord, Instagram, X, TikTok y Twitch.
 
-## Objetivo de esta versión
-- Identidad visual Prestige League.
-- LATAM + Europa.
-- Información del modo liga.
-- Ranking individual.
-- Ranking de equipos.
-- Torneos.
-- Equipos.
-- Diseño responsive.
+## Deploy
+Subir el contenido de esta carpeta al repositorio de la web y hacer deploy en Railway.
 
-## Próximo paso
-Conectar el frontend a una API segura que lea PostgreSQL.
-
-IMPORTANTE:
-El navegador NO debe conectarse directamente a PostgreSQL. La arquitectura será:
-
-Frontend -> API/backend -> PostgreSQL
-
-La base de datos existente del bot se conserva.
-
-
-## V8 consolidada
-Incluye Home conectado a PostgreSQL, rankings completos, Discord, Modo Liga, resultado `/resultado`, reglamento, inscripción al torneo y pago PayPal. El enlace de pago predeterminado es https://paypal.me/prestigeleaguetorneo/25USD.
+La web y el bot deben usar la misma `DATABASE_URL` para que el ranking se sincronice en tiempo real.

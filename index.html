@@ -38,16 +38,48 @@
         <div><strong>LATAM</strong><span>REGIÓN ACTIVA</span></div>
         <div><strong>EUROPA</strong><span>REGIÓN ACTIVA</span></div>
         <div><strong id="stat-players">—</strong><span>JUGADORES</span></div>
-        <div><strong id="stat-teams">—</strong><span>EQUIPOS</span></div>
+        <div><strong id="stat-tournament">14</strong><span>PRÓXIMO TORNEO · SEP</span></div>
       </div>
     </div>
   </section>
 
   <section class="home-cards">
-    <button class="home-card nav-route" data-route="liga"><span>01</span><b>LIGA</b><small>Ranking · Reglamento · Info</small></button>
-    <button class="home-card nav-route" data-route="torneos"><span>02</span><b>TORNEOS</b><small>Inscripciones · Activos · Próximos · Historial</small></button>
+    <button class="home-card nav-route" data-route="liga"><span>01</span><b>LIGA</b><small>Ranking · Reglamento · Info · 4v4</small></button>
+    <button class="home-card nav-route" data-route="torneos"><span>02</span><b>TORNEOS</b><small>Próximo · Inscripciones · Activos · Historial</small></button>
     <button class="home-card nav-route" data-route="info"><span>03</span><b>INFORMACIÓN</b><small>Prestige League y funcionamiento</small></button>
-    <button class="home-card nav-route" data-route="discord"><span>04</span><b>DISCORD</b><small>Comunidad oficial</small></button>
+    <button class="home-card home-card-discord nav-route" data-route="discord"><span>04</span><b>DISCORD</b><small>Comunidad oficial · <span id="discord-members-card">—</span> jugadores</small></button>
+  </section>
+
+  <section class="home-feature-grid">
+    <article class="home-feature home-feature-main">
+      <span class="section-kicker">PRÓXIMO TORNEO</span>
+      <h2>14 SEPTIEMBRE</h2>
+      <p>La próxima competencia de Prestige League comienza el 14 de septiembre de 2026.</p>
+      <button class="btn btn-primary nav-route" data-route="torneos">VER TORNEO →</button>
+    </article>
+    <article class="home-feature">
+      <span class="section-kicker">¿CÓMO FUNCIONA?</span>
+      <div class="how-steps">
+        <div><b>01</b><strong>ENTRÁ A DISCORD</strong><span>Unite a la comunidad oficial.</span></div>
+        <div><b>02</b><strong>COMPETÍ</strong><span>Jugá Liga o participá en torneos.</span></div>
+        <div><b>03</b><strong>SUBÍ</strong><span>Mejorá tu MMR y escalá el ranking.</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="social-section">
+    <div class="social-heading">
+      <span class="section-kicker">SEGUINOS</span>
+      <h2>PRESTIGE LEAGUE EN REDES</h2>
+      <p>Noticias, clips, transmisiones y novedades de la liga.</p>
+    </div>
+    <div class="social-grid">
+      <a class="social-card social-discord" href="https://discord.gg/bRDKns4TQ" target="_blank" rel="noopener noreferrer"><span>COMUNIDAD PRINCIPAL</span><b>DISCORD</b><small><span id="discord-members-social">—</span> jugadores</small><em>ENTRAR →</em></a>
+      <a class="social-card" href="https://www.instagram.com/prestige__league" target="_blank" rel="noopener noreferrer"><span>RED SOCIAL</span><b>INSTAGRAM</b><small>@prestige__league</small><em>SEGUIR →</em></a>
+      <a class="social-card" href="https://x.com/_PrestigeLeague" target="_blank" rel="noopener noreferrer"><span>RED SOCIAL</span><b>X / TWITTER</b><small>@_PrestigeLeague</small><em>SEGUIR →</em></a>
+      <a class="social-card" href="https://www.tiktok.com/@prestige__league" target="_blank" rel="noopener noreferrer"><span>RED SOCIAL</span><b>TIKTOK</b><small>@prestige__league</small><em>SEGUIR →</em></a>
+      <a class="social-card" href="https://www.twitch.tv/prestige__league" target="_blank" rel="noopener noreferrer"><span>STREAMING</span><b>TWITCH</b><small>@prestige__league</small><em>VER CANAL →</em></a>
+    </div>
   </section>
 </main>
 
@@ -71,6 +103,7 @@
       <article><b>PARTY</b><p>Las Parties permiten mantener juntos a sus integrantes durante el matchmaking.</p></article>
       <article><b>RESULTADOS</b><p>El resultado se publica con <strong>/resultado</strong> y un jugador del equipo rival debe confirmarlo.</p></article>
       <article><b>HOST</b><p>Con 8 jugadores el bot selecciona un host al azar para crear la partida privada.</p></article>
+      <article class="wide-card"><b>LIGA POR EQUIPOS — 4V4</b><p>También podés competir en formato 4v4 con tu equipo. El Team MMR es independiente del MMR individual y busca enfrentamientos equilibrados.</p></article>
     </div>
   </section>
   <section class="tab-panel" data-panel="liga-ranking">
@@ -83,7 +116,7 @@
       <article><b>DESCONEXIONES</b><p>Se evaluarán según la situación y las pruebas disponibles. No se puede abandonar una partida para evitar una derrota.</p></article>
       <article><b>RESULTADOS</b><p>Los resultados deben registrarse correctamente. Falsearlos o manipularlos será sancionado.</p></article>
       <article><b>SANCIONES</b><p>Advertencia → anulación → pérdida/ajuste de MMR → suspensión → expulsión.</p></article>
-      <article class="wide"><b>BANEOS DEL MODO LIGA</b><p><strong>Armas:</strong> Silenciador, FAL, Target Finder, pistola a dos manos y lanzagranadas como accesorio.</p><p><strong>Rachas/equipamiento:</strong> UAV, Counter UAV, Sentry, Guardian, Paquete de ayuda, Cazador y VSAT.</p><p><strong>Ventajas:</strong> Fantasma y Línea Dura.</p></article>
+      <article class="wide regulation-web-card"><b>BANEOS DEL MODO LIGA</b><p>Para garantizar partidas competitivas y equilibradas, estos elementos están prohibidos durante las partidas:</p><div class="ban-groups-web"><div><strong>ARMAS</strong><ul><li>FAL OSW</li><li>PEACEKEEPER</li><li>XPR 50</li><li>ESCUDO</li><li>KAP-40</li><li>SMAW</li><li>FHJ-18 AA</li><li>RPG</li></ul></div><div><strong>VENTAJAS</strong><ul><li>FANTASMA</li><li>CARROÑERO</li><li>RESISTENCIA ELECTRÓNICA</li><li>INGENIERO</li></ul></div><div><strong>GRANADAS LETALES Y TÁCTICAS</strong><ul><li>Betty</li><li>C4</li><li>Claymore</li><li>Sensora</li><li>Carga de choque</li><li>Sombrero Negro</li><li>Inserción táctica</li></ul></div><div><strong>ACCESORIOS</strong><ul><li>Dual Hand</li><li>Target Finder</li><li>Virote Triple</li><li>Escáner</li><li>Lanzagranadas</li></ul></div><div><strong>RACHAS</strong><ul><li>UAV</li><li>Cazador</li><li>Paquete de ayuda</li><li>UAV de Respuesta</li><li>Guardian</li><li>Centinela</li><li>Dragonfire</li><li>VSAT</li><li>PEM</li></ul></div></div><p class="regulation-warning-web"><strong>Importante:</strong> El uso de cualquier elemento prohibido hace que el equipo pierda automáticamente la partida.</p></article>
     </div>
   </section>
 </main>
@@ -141,40 +174,25 @@
     </form>
   </section>
 
-  <section class="tournament-history">
-    <div class="history-card history-active">
-      <span class="section-kicker">ACTIVOS</span>
-      <h3>TORNEOS ACTIVOS</h3>
-      <p>Los torneos actualmente activos aparecerán aquí.</p>
-    </div>
-
-    <div class="history-card history-featured">
+  <section class="tournament-history-section">
+    <div class="history-heading">
       <span class="section-kicker">HISTORIAL</span>
-      <h3>1ª EDICIÓN — 6 AL 12 DE AGOSTO</h3>
-      <p class="history-description">
-        Primera edición oficial de Prestige League. Acá podés consultar el Team Pool,
-        el bracket completo y el equipo campeón.
-      </p>
-
-      <div class="history-champion">
-        <span>CAMPEÓN</span>
-        <strong>LATAM Challengers</strong>
-      </div>
-
-      <div class="history-gallery">
-        <figure>
-          <img src="assets/torneo-2026-team-pool.jpg" alt="Team Pool de la primera edición de Prestige League">
-          <figcaption>TEAM POOL</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/torneo-2026-bracket.jpg" alt="Bracket de la primera edición de Prestige League">
-          <figcaption>BRACKET FINAL</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/torneo-2026-campeones.png" alt="Equipo campeón LATAM Challengers">
-          <figcaption>EQUIPO CAMPEÓN</figcaption>
-        </figure>
-      </div>
+      <h3>TORNEOS ANTERIORES</h3>
+      <p>Primera edición de Prestige League · 6 de agosto al 12 de agosto de 2026.</p>
+    </div>
+    <div class="history-gallery">
+      <article class="history-card">
+        <img src="assets/history/team-pool.jpg" alt="Team Pool de la Primera Edición de Prestige League" loading="lazy">
+        <div><span class="section-kicker">TEAM POOL</span><h4>SORTEO OFICIAL</h4><p>Los 16 equipos que participaron de la Primera Edición.</p></div>
+      </article>
+      <article class="history-card">
+        <img src="assets/history/bracket.jpg" alt="Bracket de la Primera Edición de Prestige League" loading="lazy">
+        <div><span class="section-kicker">BRACKETS</span><h4>CAMINO A LA FINAL</h4><p>Todos los cruces y resultados del torneo.</p></div>
+      </article>
+      <article class="history-card">
+        <img src="assets/history/champions.png" alt="LATAM Challengers campeones de Prestige League" loading="lazy">
+        <div><span class="section-kicker">CAMPEONES</span><h4>LATAM CHALLENGERS</h4><p>Campeones de la Primera Edición de Prestige League.</p></div>
+      </article>
     </div>
   </section>
 </main>
@@ -189,9 +207,11 @@
   </section>
   <section class="info-cards large">
     <article><b>¿QUÉ ES PRESTIGE LEAGUE?</b><p>Una comunidad competitiva de Black Ops 2 con Modo Liga y torneos.</p></article>
-    <article><b>LIGA</b><p>Ranking individual, MMR, equipos, matchmaking y reglamento.</p></article>
-    <article><b>TORNEOS</b><p>Competencias organizadas con inscripción, rosters y resultados.</p></article>
+    <article><b>LIGA</b><p>Ranking individual, MMR, matchmaking y reglamento. También existe la modalidad de <strong>liga por equipos 4v4</strong>, con Team MMR independiente.</p></article>
+    <article><b>TORNEOS</b><p>Competencias organizadas con inscripción, rosters, brackets y resultados.</p></article>
+    <article><b>COMUNIDAD</b><p>La comunidad principal vive en Discord. Ahí se realizan las búsquedas, se usan los comandos y se gestionan los tickets.</p></article>
     <article><b>CONSULTAS</b><p>Para preguntas generales podés usar el chat con el staff. Los resultados o correcciones de MMR se gestionan mediante los tickets de Discord.</p></article>
+    <article><b>REDES</b><p>Seguinos en Instagram, X, TikTok y Twitch para novedades, contenido y transmisiones de Prestige League.</p></article>
   </section>
 </main>
 
@@ -201,6 +221,7 @@
     <span class="section-kicker">COMUNIDAD OFICIAL</span>
     <h2>DISCORD</h2>
     <p>Entrá al servidor oficial de Prestige League para buscar partidas, usar los comandos, abrir tickets y participar de la comunidad.</p>
+    <div class="discord-page-cta"><strong><span id="discord-members-page">—</span> JUGADORES</strong><span>Comunidad activa de Prestige League</span></div>
     <a class="btn btn-primary" href="https://discord.gg/bRDKns4TQ" target="_blank" rel="noopener noreferrer">ENTRAR AL DISCORD →</a>
   </section>
 </main>
@@ -223,7 +244,18 @@
 </main>
 
 <button class="staff-chat-fab nav-route" data-route="chat">CHAT STAFF</button>
-<footer><img src="assets/prestige-logo.png" alt="Prestige League"><span>PRESTIGE LEAGUE · 2026</span></footer>
+<footer>
+  <img src="assets/prestige-logo.png" alt="Prestige League">
+  <div><strong>PRESTIGE LEAGUE</strong><span>LATAM · EUROPA · BLACK OPS 2</span></div>
+  <div class="footer-socials">
+    <a href="https://discord.gg/bRDKns4TQ" target="_blank" rel="noopener noreferrer">DISCORD</a>
+    <a href="https://www.instagram.com/prestige__league" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+    <a href="https://x.com/_PrestigeLeague" target="_blank" rel="noopener noreferrer">X</a>
+    <a href="https://www.tiktok.com/@prestige__league" target="_blank" rel="noopener noreferrer">TIKTOK</a>
+    <a href="https://www.twitch.tv/prestige__league" target="_blank" rel="noopener noreferrer">TWITCH</a>
+  </div>
+  <small>© 2026 Prestige League</small>
+</footer>
 <script src="script.js"></script>
 </body>
 </html>

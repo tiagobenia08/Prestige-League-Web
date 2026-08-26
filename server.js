@@ -18,51 +18,71 @@ app.get("/api/health", async (_req, res) => {
   }
 });
 
+let discordCountCache = { value: null, expiresAt: 0 };
+
+async function getDiscordMemberCount() {
+  const fallback = Number(process.env.DISCORD_MEMBER_COUNT || 0);
+  const now = Date.now();
+  if (discordCountCache.value !== null && now < discordCountCache.expiresAt) {
+    return discordCountCache.value;
+  }
+
+  const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
+  try {
+    const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, {
+      signal: AbortSignal.timeout(5000)
+    });
+    if (!response.ok) throw new Error(`Discord widget ${response.status}`);
+    const data = await response.json();
+    const count = Number(data.approximate_member_count ?? data.member_count);
+    if (!Number.isFinite(count) || count <= 0) throw new Error("Discord returned no member count");
+    discordCountCache = { value: Math.round(count), expiresAt: now + 15000 };
+    return discordCountCache.value;
+  } catch (e) {
+    console.error("Discord member count unavailable:", e.message);
+    if (discordCountCache.value !== null) return discordCountCache.value;
+    return fallback;
+  }
+}
+
 app.get("/api/home", async (_req, res) => {
   try {
-    const players = (await pool.query(`
-      SELECT discord_id, discord_name, psn, mmr, rank
-      FROM players
-      ORDER BY mmr DESC, psn ASC
-      LIMIT 10
-    `)).rows;
-    const teams = (await pool.query(`
-      SELECT team_id, name, mmr, logo_url
-      FROM teams
-      ORDER BY mmr DESC, name ASC
-      LIMIT 10
-    `)).rows;
-    const counts = await pool.query(`
-      SELECT
-        (SELECT COUNT(*)::int FROM players) AS players,
-        (SELECT COUNT(*)::int FROM teams) AS teams
-    `);
+    const discordMembers = await getDiscordMemberCount();
     res.json({
-      stats: counts.rows[0],
-      players,
-      teams,
-      discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ"
+      discord_members_count: discordMembers,
+      discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ",
+      updated_at: new Date().toISOString()
     });
   } catch (e) {
     console.error(e);
-    res.status(503).json({ error: "database_unavailable" });
+    res.status(503).json({ error: "home_unavailable", discord_members_count: 0 });
   }
 });
 
 app.get("/api/rankings/players", async (_req, res) => {
   try {
-    const result = await pool.query(`SELECT discord_id, discord_name, psn, mmr, rank FROM players ORDER BY mmr DESC, psn ASC`);
+    const result = await pool.query(`
+      SELECT discord_id, discord_name, psn, mmr, rank, updated_at
+      FROM players
+      ORDER BY mmr DESC, COALESCE(psn, discord_name) ASC
+    `);
     res.json(result.rows);
   } catch (e) {
+    console.error("Player ranking error:", e);
     res.status(503).json({ error: "database_unavailable" });
   }
 });
 
 app.get("/api/rankings/teams", async (_req, res) => {
   try {
-    const result = await pool.query(`SELECT team_id, name, mmr, logo_url FROM teams ORDER BY mmr DESC, name ASC`);
+    const result = await pool.query(`
+      SELECT team_id, name, mmr, logo_url, updated_at
+      FROM teams
+      ORDER BY mmr DESC, name ASC
+    `);
     res.json(result.rows);
   } catch (e) {
+    console.error("Team ranking error:", e);
     res.status(503).json({ error: "database_unavailable" });
   }
 });
