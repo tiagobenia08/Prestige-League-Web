@@ -27,8 +27,26 @@ async function getDiscordMemberCount() {
     return discordCountCache.value;
   }
 
-  const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
+  // The bot writes the real guild.member_count to PostgreSQL. Prefer that
+  // value so the website does not depend on Discord's public widget setting.
   try {
+    const result = await pool.query(`
+      SELECT member_count FROM discord_stats
+      WHERE guild_id = $1
+      LIMIT 1
+    `, [process.env.DISCORD_GUILD_ID || "1526300364289081344"]);
+    const count = Number(result.rows[0]?.member_count);
+    if (Number.isFinite(count) && count > 0) {
+      discordCountCache = { value: Math.round(count), expiresAt: now + 10000 };
+      return discordCountCache.value;
+    }
+  } catch (e) {
+    console.error("Discord count DB unavailable:", e.message);
+  }
+
+  // Fallback only if the bot has not populated the DB yet.
+  try {
+    const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
     const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, {
       signal: AbortSignal.timeout(5000)
     });
@@ -36,7 +54,7 @@ async function getDiscordMemberCount() {
     const data = await response.json();
     const count = Number(data.approximate_member_count ?? data.member_count);
     if (!Number.isFinite(count) || count <= 0) throw new Error("Discord returned no member count");
-    discordCountCache = { value: Math.round(count), expiresAt: now + 15000 };
+    discordCountCache = { value: Math.round(count), expiresAt: now + 10000 };
     return discordCountCache.value;
   } catch (e) {
     console.error("Discord member count unavailable:", e.message);
