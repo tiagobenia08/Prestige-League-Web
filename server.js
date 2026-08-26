@@ -18,29 +18,34 @@ app.get("/api/health", async (_req, res) => {
   }
 });
 
-async function getDiscordMemberCount() {
-  const fallback = Number(process.env.DISCORD_MEMBER_COUNT || 370);
-  const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
-  try {
-    const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { signal: AbortSignal.timeout(4000) });
-    if (!response.ok) return fallback;
-    const data = await response.json();
-    return Number(data.approximate_member_count || data.member_count || fallback);
-  } catch {
-    return fallback;
-  }
-}
-
 app.get("/api/home", async (_req, res) => {
   try {
-    const discordMembers = await getDiscordMemberCount();
+    const players = (await pool.query(`
+      SELECT discord_id, discord_name, psn, mmr, rank
+      FROM players
+      ORDER BY mmr DESC, psn ASC
+      LIMIT 10
+    `)).rows;
+    const teams = (await pool.query(`
+      SELECT team_id, name, mmr, logo_url
+      FROM teams
+      ORDER BY mmr DESC, name ASC
+      LIMIT 10
+    `)).rows;
+    const counts = await pool.query(`
+      SELECT
+        (SELECT COUNT(*)::int FROM players) AS players,
+        (SELECT COUNT(*)::int FROM teams) AS teams
+    `);
     res.json({
-      discord_members_count: discordMembers,
+      stats: counts.rows[0],
+      players,
+      teams,
       discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ"
     });
   } catch (e) {
     console.error(e);
-    res.status(503).json({ error: "database_unavailable", discord_members_count: 370 });
+    res.status(503).json({ error: "database_unavailable" });
   }
 });
 

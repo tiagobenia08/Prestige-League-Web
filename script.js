@@ -32,13 +32,10 @@ function showRoute(route) {
 async function loadHomeStats() {
   try {
     const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
-    if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    const members = d.discord_members_count ?? d.stats?.discord_members_count ?? 370;
-    document.getElementById("stat-players").textContent = `${members}+`;
-  } catch {
-    document.getElementById("stat-players").textContent = "370+";
-  }
+    document.getElementById("stat-players").textContent = d.players_count ?? d.players ?? "—";
+    document.getElementById("stat-teams").textContent = d.teams_count ?? d.teams ?? "—";
+  } catch {}
 }
 
 async function loadRanking() {
