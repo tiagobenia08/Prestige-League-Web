@@ -15,3 +15,10 @@ Incluye:
 Subir el contenido de esta carpeta al repositorio de la web y hacer deploy en Railway.
 
 La web y el bot deben usar la misma `DATABASE_URL` para que el ranking se sincronice en tiempo real.
+
+
+## Corrección 2026-08-26
+- Contador de miembros: Discord Invite API con approximate_member_count.
+- Ranking: consulta PostgreSQL sin caché HTTP y refresco de la web cada 10 s.
+- Baneos del Modo Liga: reemplazados por la lista exacta indicada por la organización, incluyendo Silenciador.
+- No se modifica el bot.

@@ -161,5 +161,5 @@ document.addEventListener("DOMContentLoaded", () => {
   showRoute(["liga","torneos","info","discord","chat"].includes(hash) ? hash : "home");
 
   // Mantiene Home y Ranking actualizados sin tener que recargar la página.
-  setInterval(refreshLiveData, 30000);
+  setInterval(refreshLiveData, 10000);
 });
