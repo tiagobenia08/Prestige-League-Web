@@ -19,28 +19,70 @@ app.get("/api/health", async (_req, res) => {
 });
 
 async function getDiscordMemberCount() {
-  const fallback = Number(process.env.DISCORD_MEMBER_COUNT || 370);
   const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
-  try {
-    const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { signal: AbortSignal.timeout(4000) });
-    if (!response.ok) return fallback;
-    const data = await response.json();
-    return Number(data.approximate_member_count || data.member_count || fallback);
-  } catch {
-    return fallback;
+  const botToken = process.env.DISCORD_TOKEN || process.env.DISCORD_BOT_TOKEN;
+  const widgetFallback = async () => {
+    try {
+      const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { signal: AbortSignal.timeout(4000) });
+      if (!response.ok) return null;
+      const data = await response.json();
+      const count = Number(data.approximate_member_count || data.member_count);
+      return Number.isFinite(count) && count > 0 ? count : null;
+    } catch {
+      return null;
+    }
+  };
+
+  // Prefer the bot-authenticated Discord endpoint: it is more reliable than
+  // the public widget and uses the same guild as the production bot.
+  if (botToken) {
+    try {
+      const response = await fetch(`https://discord.com/api/v10/guilds/${guildId}?with_counts=true`, {
+        headers: { Authorization: `Bot ${botToken}` },
+        signal: AbortSignal.timeout(5000)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const count = Number(data.approximate_member_count || data.member_count);
+        if (Number.isFinite(count) && count > 0) return count;
+      }
+    } catch {}
   }
+
+  return await widgetFallback();
 }
+
 
 app.get("/api/home", async (_req, res) => {
   try {
     const discordMembers = await getDiscordMemberCount();
+    const counts = await pool.query(`
+      SELECT
+        (SELECT COUNT(*)::int FROM players) AS players,
+        (SELECT COUNT(*)::int FROM teams) AS teams
+    `);
+    const players = (await pool.query(`
+      SELECT discord_id, discord_name, psn, mmr, rank
+      FROM players
+      ORDER BY mmr DESC, psn ASC
+      LIMIT 10
+    `)).rows;
+    const teams = (await pool.query(`
+      SELECT team_id, name, mmr, logo_url
+      FROM teams
+      ORDER BY mmr DESC, name ASC
+      LIMIT 10
+    `)).rows;
     res.json({
+      stats: counts.rows[0],
       discord_members_count: discordMembers,
+      players,
+      teams,
       discord_url: process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ"
     });
   } catch (e) {
     console.error(e);
-    res.status(503).json({ error: "database_unavailable", discord_members_count: 370 });
+    res.status(503).json({ error: "database_unavailable", discord_members_count: null });
   }
 });
 
@@ -237,6 +279,6 @@ app.post('/api/admin/chat', adminAuth, async (req, res) => {
   } catch (e) { console.error('Admin chat send error:', e); res.status(503).json({ error: 'database_unavailable' }); }
 });
 
-app.get('/admin', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/admin', (_req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
 
 app.listen(port, "0.0.0.0", () => console.log(`Prestige League Web/API listening on ${port}`));

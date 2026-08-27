@@ -50,10 +50,16 @@ async function loadHomeStats() {
     const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
     if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    const members = d.discord_members_count ?? d.stats?.discord_members_count ?? 370;
-    document.getElementById("stat-players").textContent = `${members}+`;
-  } catch {
-    document.getElementById("stat-players").textContent = "370+";
+    const members = Number(d.discord_members_count);
+    const value = Number.isFinite(members) && members > 0 ? `${members}+` : "—";
+    const stat = document.getElementById("stat-players");
+    if (stat) stat.textContent = value;
+    document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = Number.isFinite(members) && members > 0 ? members : "—"; });
+  } catch (error) {
+    console.error("No se pudo cargar el contador de Discord:", error);
+    const stat = document.getElementById("stat-players");
+    if (stat) stat.textContent = "—";
+    document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = "—"; });
   }
 }
 
