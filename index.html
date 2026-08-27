@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prestige League</title>
+<link rel="icon" type="image/png" href="assets/prestige-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -227,24 +228,6 @@
 </main>
 
 <button class="staff-chat-fab nav-route" data-route="chat">CHAT STAFF</button>
-
-<main id="view-admin" class="route-view admin-view">
-  <section class="page-header">
-    <button class="back-home nav-route" data-route="home">← VOLVER AL HOME</button>
-    <span class="section-kicker">PRESTIGE LEAGUE</span><h2>ADMIN</h2>
-    <p>Panel privado para gestionar inscripciones y consultas del chat.</p>
-  </section>
-  <section id="admin-login" class="admin-login-box">
-    <div><span class="section-kicker">ACCESO PRIVADO</span><h3>INGRESAR AL PANEL</h3><p>Ingresá la contraseña de administrador configurada en Railway.</p></div>
-    <form id="admin-login-form" class="admin-login-form"><input id="admin-password" type="password" required autocomplete="current-password" placeholder="Contraseña"><button class="btn btn-primary" type="submit">ENTRAR</button><p id="admin-login-message" class="registration-message"></p></form>
-  </section>
-  <section id="admin-content" class="admin-content" hidden>
-    <div class="admin-toolbar"><div><span class="section-kicker">PANEL</span><h3>GESTIÓN</h3></div><div class="admin-actions"><button id="admin-refresh" class="btn btn-ghost" type="button">ACTUALIZAR</button><button id="admin-logout" class="btn btn-ghost" type="button">CERRAR SESIÓN</button></div></div>
-    <section class="admin-section"><div class="panel-heading"><span class="section-kicker">TORNEOS</span><h3>INSCRIPCIONES</h3></div><div id="admin-registrations" class="admin-list"></div></section>
-    <section class="admin-section"><div class="panel-heading"><span class="section-kicker">ATENCIÓN AL JUGADOR</span><h3>MENSAJES</h3></div><div id="admin-chat-messages" class="chat-messages admin-chat-messages"></div><form id="admin-chat-form" class="chat-form admin-chat-form"><input name="message" required maxlength="1000" placeholder="Responder al chat..."><button class="btn btn-primary" type="submit">RESPONDER</button></form></section>
-  </section>
-</main>
-
 <footer>
   <img src="assets/prestige-logo.png" alt="Prestige League">
   <div><strong>PRESTIGE LEAGUE</strong><span>LATAM · EUROPA · BLACK OPS 2</span></div>
