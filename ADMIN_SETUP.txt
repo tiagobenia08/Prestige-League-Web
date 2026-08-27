@@ -1,0 +1,12 @@
+PRESTIGE LEAGUE — PANEL ADMIN
+
+1. En Railway, abrí el servicio de la web.
+2. Entrá a Variables.
+3. Creá la variable ADMIN_PASSWORD.
+4. Como valor poné una contraseña fuerte que solo conozca el staff.
+5. Guardá y esperá el redeploy.
+6. Entrá a https://TU-DOMINIO/admin
+
+El panel permite ver inscripciones, revisar/verificar pagos, aprobar o rechazar inscripciones y leer/responder los mensajes enviados desde CHAT STAFF.
+
+Importante: no pongas la contraseña dentro de index.html, script.js ni server.js. Debe quedar solamente como variable de Railway.
