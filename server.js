@@ -29,6 +29,24 @@ async function getDiscordMemberCount() {
 
   const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
   const botToken = process.env.DISCORD_TOKEN || process.env.DISCORD_BOT_TOKEN;
+  // Public invite count: this works even when Discord Server Widget is disabled.
+  const inviteFallback = async () => {
+    try {
+      const inviteCode = (process.env.DISCORD_INVITE_URL || "https://discord.gg/bRDKns4TQ").split("/").pop();
+      const response = await fetch(`https://discord.com/api/v10/invites/${inviteCode}?with_counts=true`, { signal: AbortSignal.timeout(5000) });
+      if (!response.ok) return null;
+      const data = await response.json();
+      const count = Number(data.approximate_member_count);
+      if (Number.isFinite(count) && count > 0) {
+        discordMemberCache = { count, updatedAt: Date.now() };
+        return count;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  };
+
   const widgetFallback = async () => {
     try {
       const response = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { signal: AbortSignal.timeout(4000) });
@@ -64,6 +82,8 @@ async function getDiscordMemberCount() {
     } catch {}
   }
 
+  const inviteCount = await inviteFallback();
+  if (inviteCount !== null) return inviteCount;
   return await widgetFallback();
 }
 
