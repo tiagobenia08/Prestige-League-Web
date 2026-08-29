@@ -15,6 +15,22 @@ function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 }
 
+// Rangos oficiales del Modo Liga, iguales a los del bot de Discord.
+const RANKS = [
+  { name: "Hierro", min: 1000, max: 1100, icon: "assets/ranks/hierro.png" },
+  { name: "Bronce", min: 1100, max: 1300, icon: "assets/ranks/bronce.png" },
+  { name: "Plata", min: 1300, max: 1600, icon: "assets/ranks/plata.png" },
+  { name: "Oro", min: 1600, max: 2000, icon: "assets/ranks/oro.png" },
+  { name: "Platino", min: 2000, max: 2500, icon: "assets/ranks/platino.png" },
+  { name: "Maestro", min: 2500, max: Infinity, icon: "assets/ranks/maestro.png" }
+];
+
+function getRank(mmr) {
+  const value = Number(mmr) || 0;
+  if (value < 1000) return RANKS[0];
+  return RANKS.find(rank => value >= rank.min && value < rank.max) || RANKS[RANKS.length - 1];
+}
+
 function showRoute(route) {
   document.querySelectorAll(".route-view").forEach(v => v.classList.remove("active"));
   const view = document.getElementById(`view-${route}`);
@@ -30,16 +46,21 @@ function showRoute(route) {
 }
 
 async function loadHomeStats() {
-  const el = document.getElementById("stat-players");
-  if (!el) return;
   try {
-    const r = await fetch(`${API_BASE}/api/discord/members`, {cache:"no-store"});
-    if (!r.ok) throw new Error("discord_count_failed");
+    const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
+    if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    if (Number.isFinite(Number(d.members))) {
-      el.textContent = Number(d.members).toLocaleString("es-UY");
-    }
-  } catch {}
+    const members = Number(d.discord_members_count);
+    const value = Number.isFinite(members) && members > 0 ? `${members}+` : "—";
+    const stat = document.getElementById("stat-players");
+    if (stat) stat.textContent = value;
+    document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = Number.isFinite(members) && members > 0 ? members : "—"; });
+  } catch (error) {
+    console.error("No se pudo cargar el contador de Discord:", error);
+    const stat = document.getElementById("stat-players");
+    if (stat) stat.textContent = "—";
+    document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = "—"; });
+  }
 }
 
 async function loadRanking() {
@@ -48,12 +69,17 @@ async function loadRanking() {
   try {
     const r = await fetch(`${API_BASE}/api/rankings/players`, {cache:"no-store"});
     const players = await r.json();
-    el.innerHTML = players.map((p,i) => `
+    el.innerHTML = players.map((p,i) => {
+      const mmr = Math.round(Number(p.mmr) || 0);
+      const rank = getRank(mmr);
+      return `
       <div class="ranking-row">
         <b>${i+1}</b>
         <strong>${escapeHtml(p.psn || p.name || "Jugador")}</strong>
-        <span>${Math.round(Number(p.mmr)||0)} MMR</span>
-      </div>`).join("");
+        <span class="rank-cell"><img src="${rank.icon}" alt="${rank.name}" title="${rank.name}"><small>${rank.name}</small></span>
+        <span class="mmr-cell">${mmr} MMR</span>
+      </div>`;
+    }).join("");
   } catch {
     el.innerHTML = "<p>No se pudo cargar el ranking.</p>";
   }
@@ -133,5 +159,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(() => {
     if (document.getElementById("view-chat")?.classList.contains("active")) loadStaffChat();
   }, 5000);
-  setInterval(loadHomeStats, 5 * 60 * 1000);
 });

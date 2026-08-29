@@ -158,9 +158,13 @@ body { min-height:100vh; }
 .panel-heading { margin-bottom:18px; }
 .panel-heading h3 { font:800 46px "Barlow Condensed",sans-serif; margin:4px 0; }
 .ranking-list { border-top:1px solid var(--line); }
-.ranking-row { display:grid; grid-template-columns:55px 1fr 120px; align-items:center; padding:15px 10px; border-bottom:1px solid var(--line); }
+.ranking-row { display:grid; grid-template-columns:55px minmax(0,1fr) 130px 120px; align-items:center; gap:14px; padding:13px 10px; border-bottom:1px solid var(--line); }
 .ranking-row b { color:#555; }
-.ranking-row span { text-align:right; color:var(--orange); font-weight:800; }
+.ranking-row strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ranking-row .rank-cell { display:flex; align-items:center; justify-content:flex-start; gap:9px; color:#ddd; font-weight:800; }
+.ranking-row .rank-cell img { width:38px; height:38px; object-fit:contain; flex:none; }
+.ranking-row .rank-cell small { color:#aaa; font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+.ranking-row .mmr-cell { text-align:right; color:var(--orange); font-weight:800; }
 .rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .rules-grid .wide { grid-column:1/-1; }
 .tournament-grid { max-width:1100px; margin:0 auto; padding:20px 7vw 90px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
@@ -200,7 +204,9 @@ footer img { width:34px; }
   .rules-grid .wide { grid-column:auto; }
   .payment-box { flex-direction:column; align-items:flex-start; }
   .chat-form { grid-template-columns:1fr; }
-  .ranking-row { grid-template-columns:35px 1fr 90px; }
+  .ranking-row { grid-template-columns:35px minmax(0,1fr) 105px 85px; gap:8px; }
+  .ranking-row .rank-cell small { display:none; }
+  .ranking-row .rank-cell img { width:34px; height:34px; }
 }
 
 /* V11 — inscripción integrada dentro de Próximo Torneo */
@@ -256,18 +262,66 @@ footer img { width:34px; }
   border-color: #ff7a00 !important;
 }
 
-
-/* Hero CTA — readable and highlighted on hover */
-.hero-actions .btn-ghost {
-  color: #f2f2f2 !important;
-  border: 1px solid rgba(255,255,255,.28);
-  background: rgba(255,255,255,.04);
-  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+/* V13 — Home, comunidad y legibilidad */
+.hero-actions .btn-ghost,
+.hero-actions .btn-ghost:visited {
+  color:#f5f5f5 !important;
+  border-color:rgba(255,255,255,.38) !important;
+  background:rgba(255,255,255,.04) !important;
 }
 .hero-actions .btn-ghost:hover,
 .hero-actions .btn-ghost:focus-visible {
-  color: #111 !important;
-  background: #ff7a00;
-  border-color: #ff7a00;
-  transform: translateY(-2px);
+  color:#090909 !important;
+  background:var(--orange) !important;
+  border-color:var(--orange) !important;
+}
+.home-card-discord { border-color:rgba(255,118,0,.38); background:linear-gradient(135deg,rgba(255,118,0,.11),#0d0d0f 70%); }
+.home-card-discord:hover { border-color:var(--orange); box-shadow:0 12px 35px rgba(255,118,0,.12); }
+.home-feature-grid { max-width:1200px; margin:0 auto; padding:0 7vw 55px; display:grid; grid-template-columns:1.1fr .9fr; gap:14px; }
+.home-feature { border:1px solid var(--line); background:#0d0d0f; padding:30px; min-height:250px; }
+.home-feature-main { border-color:rgba(255,118,0,.35); background:linear-gradient(135deg,rgba(255,118,0,.12),#0d0d0f 68%); }
+.home-feature h2 { font:900 clamp(48px,6vw,76px) "Barlow Condensed",sans-serif; margin:12px 0; }
+.home-feature p { color:#999; line-height:1.7; max-width:650px; }
+.how-steps { display:grid; gap:18px; margin-top:22px; }
+.how-steps div { display:grid; grid-template-columns:34px 1fr; column-gap:10px; row-gap:2px; }
+.how-steps b { color:var(--orange); font-size:11px; grid-row:span 2; }
+.how-steps strong { font-size:13px; }
+.how-steps span { color:#777; font-size:11px; line-height:1.5; }
+.social-section { max-width:1200px; margin:0 auto; padding:35px 7vw 90px; }
+.social-heading h2 { font:900 clamp(40px,5vw,68px) "Barlow Condensed",sans-serif; margin:10px 0 6px; }
+.social-heading p { color:#888; margin:0 0 28px; }
+.social-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.social-card { min-height:180px; border:1px solid var(--line); background:#0d0d0f; padding:22px; display:flex; flex-direction:column; transition:.2s; }
+.social-card:hover { transform:translateY(-2px); border-color:rgba(255,118,0,.55); }
+.social-card span { color:#666; font-size:8px; font-weight:800; letter-spacing:.12em; }
+.social-card b { font:800 26px "Barlow Condensed",sans-serif; margin-top:20px; }
+.social-card small { color:#777; margin-top:7px; font-size:10px; }
+.social-card em { margin-top:auto; color:var(--orange); font-style:normal; font-size:9px; font-weight:800; letter-spacing:.1em; }
+.social-discord { border-color:rgba(255,118,0,.42); background:linear-gradient(135deg,rgba(255,118,0,.12),#0d0d0f 75%); }
+.footer-socials { display:flex; gap:13px; flex-wrap:wrap; justify-content:center; }
+.footer-socials a { color:#888; font-size:8px; font-weight:800; letter-spacing:.08em; }
+.footer-socials a:first-child { color:var(--orange); }
+.discord-page-cta { margin:0 auto 22px; display:flex; flex-direction:column; gap:4px; width:max-content; max-width:100%; padding:18px 28px; border:1px solid rgba(255,118,0,.35); background:rgba(255,118,0,.07); }
+.discord-page-cta strong { color:var(--orange); font:900 38px "Barlow Condensed",sans-serif; }
+.discord-page-cta span { color:#777; font-size:10px; letter-spacing:.08em; }
+/* La información y el reglamento se leen más cómodamente */
+#view-liga .info-cards p,
+#view-liga .rules-grid p,
+#view-info .info-cards p { font-size:15px; line-height:1.85; color:#b1b1b5; }
+#view-liga .info-cards b,
+#view-liga .rules-grid b,
+#view-info .info-cards b { font-size:12px; }
+#view-liga .info-cards article,
+#view-liga .rules-grid article,
+#view-info .info-cards article { padding:30px; }
+#view-liga .wide-card { grid-column:1/-1; }
+@media(max-width:1000px){ .social-grid { grid-template-columns:repeat(3,1fr); } }
+@media(max-width:800px){
+  .home-feature-grid { grid-template-columns:1fr; padding-left:24px; padding-right:24px; }
+  .social-section { padding-left:24px; padding-right:24px; }
+  .social-grid { grid-template-columns:1fr 1fr; }
+  #view-liga .info-cards p,
+  #view-liga .rules-grid p,
+  #view-info .info-cards p { font-size:14px; }
+  .footer-socials { width:100%; justify-content:flex-start; }
 }
