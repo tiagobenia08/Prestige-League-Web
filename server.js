@@ -156,7 +156,7 @@ app.get("/api/tournament/config", (_req, res) => {
   res.json({
     entry_fee_usd: 20,
     max_players: 6,
-    payment_url: process.env.TOURNAMENT_PAYMENT_URL || "https://paypal.me/prestigeleaguetorneo/20USD"
+    payment_url: "https://paypal.me/prestigeleaguetorneo/20USD"
   });
 });
 
