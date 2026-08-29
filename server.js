@@ -18,7 +18,15 @@ app.get("/api/health", async (_req, res) => {
   }
 });
 
+let discordMemberCache = { count: null, updatedAt: 0 };
+const DISCORD_COUNT_CACHE_MS = 30000;
+
 async function getDiscordMemberCount() {
+  const now = Date.now();
+  if (discordMemberCache.count !== null && now - discordMemberCache.updatedAt < DISCORD_COUNT_CACHE_MS) {
+    return discordMemberCache.count;
+  }
+
   const guildId = process.env.DISCORD_GUILD_ID || "1526300364289081344";
   const botToken = process.env.DISCORD_TOKEN || process.env.DISCORD_BOT_TOKEN;
   const widgetFallback = async () => {
@@ -27,7 +35,11 @@ async function getDiscordMemberCount() {
       if (!response.ok) return null;
       const data = await response.json();
       const count = Number(data.approximate_member_count || data.member_count);
-      return Number.isFinite(count) && count > 0 ? count : null;
+      if (Number.isFinite(count) && count > 0) {
+        discordMemberCache = { count, updatedAt: Date.now() };
+        return count;
+      }
+      return null;
     } catch {
       return null;
     }
@@ -44,7 +56,10 @@ async function getDiscordMemberCount() {
       if (response.ok) {
         const data = await response.json();
         const count = Number(data.approximate_member_count || data.member_count);
-        if (Number.isFinite(count) && count > 0) return count;
+        if (Number.isFinite(count) && count > 0) {
+          discordMemberCache = { count, updatedAt: Date.now() };
+          return count;
+        }
       }
     } catch {}
   }
@@ -53,7 +68,19 @@ async function getDiscordMemberCount() {
 }
 
 
+app.get("/api/discord-members", async (_req, res) => {
+  try {
+    const count = await getDiscordMemberCount();
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.json({ count });
+  } catch (e) {
+    console.error("No se pudo obtener el contador de Discord:", e);
+    res.status(503).json({ count: null });
+  }
+});
+
 app.get("/api/home", async (_req, res) => {
+  res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   try {
     const discordMembers = await getDiscordMemberCount();
     const counts = await pool.query(`

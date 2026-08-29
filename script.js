@@ -47,11 +47,11 @@ function showRoute(route) {
 
 async function loadHomeStats() {
   try {
-    const r = await fetch(`${API_BASE}/api/home`, {cache:"no-store"});
+    const r = await fetch(`${API_BASE}/api/discord-members`, {cache:"no-store"});
     if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    const members = Number(d.discord_members_count);
-    const value = Number.isFinite(members) && members > 0 ? `${members}+` : "—";
+    const members = Number(d.count);
+    const value = Number.isFinite(members) && members > 0 ? String(members) : "—";
     const stat = document.getElementById("stat-players");
     if (stat) stat.textContent = value;
     document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = Number.isFinite(members) && members > 0 ? members : "—"; });
@@ -61,6 +61,13 @@ async function loadHomeStats() {
     if (stat) stat.textContent = "—";
     document.querySelectorAll("[data-discord-members]").forEach(el => { el.textContent = "—"; });
   }
+}
+
+// Actualización automática del contador de Discord.
+// Se consulta periódicamente para que la cifra cambie sin recargar la página.
+function startDiscordMemberPolling() {
+  loadHomeStats();
+  setInterval(loadHomeStats, 30000);
 }
 
 async function loadRanking() {
@@ -152,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("registration-form")?.addEventListener("submit", submitRegistration);
   document.getElementById("staff-chat-form")?.addEventListener("submit", submitStaffChat);
-  loadHomeStats();
+  startDiscordMemberPolling();
 
   const hash = location.hash.replace("#","");
   showRoute(["liga","torneos","info","discord","chat"].includes(hash) ? hash : "home");
